@@ -626,7 +626,9 @@ function Panelists({ showAll = false }) {
         <div className="relative mx-auto max-w-7xl">
           <div className="flex flex-col gap-8 border-b border-white/15 pb-10 md:flex-row md:items-end md:justify-between md:pb-12">
             <div>
-              <p className="section-kicker mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-white/45">{showAll ? 'The Complete Lineup' : 'The Lineup'}</p>
+              {!showAll && (
+                <p className="section-kicker mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-white/45">The Lineup</p>
+              )}
               <h2 id="panelists-heading" className="text-[48px] font-semibold leading-[0.95] tracking-[-0.055em] sm:text-6xl md:text-7xl lg:text-[84px]">
                 {showAll ? <>All <span className="text-[#f73301]">Speakers</span></> : <>Speakers/<span className="text-[#f73301]">Panelists</span></>}
               </h2>
@@ -1091,12 +1093,12 @@ function SponsorPage() {
 
   return (
     <div className="sponsor-page min-h-screen bg-[#f5f6f7] text-[#171717]">
-      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-black/10 bg-white/95 px-6 backdrop-blur-md md:h-[72px] md:px-10">
+      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#f73301]/35 bg-[#261813]/95 px-6 shadow-[0_10px_32px_rgba(247,51,1,0.10)] backdrop-blur-md md:h-[72px] md:px-10">
         <a href="/" className="flex shrink-0 items-center" aria-label="10 Hours Houston home">
           <img className="sponsor-brand block h-auto w-[120px]" src="/10-hours-houston-logo.svg" alt="10 Hours Houston" />
         </a>
         <div className="flex items-center gap-5">
-          <a href="/" className="text-[10px] font-semibold uppercase tracking-[0.16em] text-black/55 transition-colors hover:text-black">
+          <a href="/" className="sponsor-back-link text-[10px] font-semibold uppercase tracking-[0.16em] transition-opacity hover:opacity-75">
             ← Back to website
           </a>
           <a className="sponsor-register hidden bg-[#f73301] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01] sm:inline-flex" href={REGISTER_URL} target="_blank" rel="noreferrer">

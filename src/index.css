@@ -96,7 +96,11 @@ section[id] {
 }
 
 .sponsor-brand {
-  filter: brightness(0);
+  filter: none;
+}
+
+.sponsor-back-link {
+  color: #fff;
 }
 
 .sponsor-register {
@@ -274,7 +278,7 @@ section[id] {
 }
 
 @media (max-width: 520px) {
-  .page-shell { height: 100svh; min-height: 100svh; padding-top: 80px; padding-bottom: 0; }
+  .page-shell { height: auto; min-height: 100svh; padding-top: 80px; padding-bottom: 64px; }
   .witnesses-art { aspect-ratio: 5 / 1; }
   .tagline { text-align: center; font-size: 18px; line-height: 1.25; }
   .discipline-strip { gap: 8px; padding-inline: 0; font-size: 9px; letter-spacing: .14em; }
@@ -283,7 +287,7 @@ section[id] {
   .event-row > div > div { font-size: 20px; }
   .event-row span { font-size: 14px; }
   .primary-register { align-self: center; }
-  .countdown-transition { margin-top: 12px; translate: 0 32px; transform: none; }
+  .countdown-transition { margin-top: 96px; translate: 0; transform: none; }
   .countdown-transition::after { display: none; }
   .countdown {
     display: grid;
@@ -304,7 +308,6 @@ section[id] {
   .tagline { margin-top: 14px; }
   .discipline-strip { margin-top: 20px; }
   .event-row { margin-top: 40px; }
-  .countdown-transition { margin-top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
