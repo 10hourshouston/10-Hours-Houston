@@ -52,7 +52,6 @@ function Header() {
   const [scrolled, setScrolled] = useState(false)
   const links = [
     { label: 'About', href: '#about', target: 'about' },
-    { label: 'The Burden', href: '#burden', target: 'burden' },
     { label: 'Schedule', href: '/schedule' },
     { label: 'Panelists', href: '#panelists', target: 'panelists' },
     { label: 'Sponsors', href: '/sponsors' },
@@ -168,29 +167,6 @@ function About() {
               <p className="mt-1 text-sm tracking-wide text-white/50">Pillars of Purpose</p>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function Burden() {
-  return (
-    <section id="burden" className="motion-section linked-section relative overflow-hidden bg-[#e8e3da] px-6 py-24 text-[#171717] md:py-36" aria-labelledby="burden-heading">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40" aria-hidden="true">
-        <div className="select-none break-all text-[10px] leading-6 tracking-[0.4em] text-black/[0.035]">
-          {'010110010100100101010001001001010011010101'.repeat(120)}
-        </div>
-      </div>
-
-      <div className="relative mx-auto max-w-5xl">
-        <p className="section-kicker mb-8 text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">The Burden</p>
-        <h2 id="burden-heading" className="mb-12 text-4xl font-bold leading-none tracking-tighter text-[#171717] md:text-6xl lg:text-7xl">
-          Formed at the Altar.<br />
-          <span className="text-[#f73301]">Sent to every Sphere.</span>
-        </h2>
-        <div className="grid max-w-2xl gap-6 text-base font-normal leading-relaxed text-black/65 md:text-lg">
-          <p>10 Hours Houston was born out of a burden to see a generation return to God's presence and rise with clarity, fire, and conviction, formed at the altar before being sent into systems, industries, cultures, and nations. It is 10 hours set apart to seek the Lord, recover ancient wells, and receive strength for new frontiers, in culture, technology, leadership, and the emerging age of AI.</p>
         </div>
       </div>
     </section>
@@ -967,7 +943,6 @@ function HomePage() {
       </main>
       <Scripture />
       <About />
-      <Burden />
       <Experience />
       <Panelists />
       <Testimonials />
