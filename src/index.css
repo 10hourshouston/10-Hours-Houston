@@ -107,16 +107,59 @@ section[id] {
   color: #fff;
 }
 
-.timeline-step {
-  transition: color 300ms ease;
-}
-
-.timeline-step.active .step-dot {
-  box-shadow: 0 0 0 6px rgba(247, 51, 1, .15);
-}
-
 .primary-register {
   font-family: "JetBrains Mono", monospace;
+}
+
+.schedule-filters {
+  scrollbar-width: none;
+}
+
+.schedule-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.schedule-filter {
+  flex: 0 0 auto;
+  border: 1px solid rgba(0, 0, 0, .16);
+  background: transparent;
+  padding: 12px 17px;
+  color: rgba(0, 0, 0, .58);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.schedule-filter:hover {
+  border-color: #171717;
+  color: #171717;
+}
+
+.schedule-filter.is-active {
+  border-color: #171717;
+  background: #171717;
+  color: #fff;
+}
+
+.schedule-card {
+  background: rgba(255, 255, 255, .84);
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.schedule-card:hover {
+  border-color: rgba(247, 51, 1, .45);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(37, 24, 18, .07);
+}
+
+.schedule-card.is-interval {
+  background: #e7e1d8;
+}
+
+.schedule-card.is-featured {
+  border-left: 3px solid #f73301;
 }
 
 .linked-section,
@@ -154,6 +197,26 @@ section[id] {
 
 .panelist-modal-scroll::-webkit-scrollbar-thumb {
   background: #f73301;
+}
+
+.modal-viewport {
+  height: 100vh;
+  height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.modal-panel {
+  height: min(92vh, 720px);
+  height: min(92dvh, 720px);
+  max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  .modal-panel {
+    height: min(85vh, 640px);
+    height: min(85dvh, 640px);
+  }
 }
 
 .witnesses-art {
@@ -208,7 +271,6 @@ section[id] {
   height: 100vh;
   transform: translateX(-50%);
   background: white;
-  border-radius: 50% 50% 0 0 / 96px 96px 0 0;
 }
 
 .countdown-number { font-size: clamp(62px, 6vw, 86px); letter-spacing: -4px; }
@@ -270,7 +332,7 @@ section[id] {
   .event-row strong { font-size: 19px; }
   .event-row span { font-size: 16px; }
   .primary-register { margin-left: 0; }
-  .countdown-transition { margin-top: 30px; translate: 0 24px; transform: none; }
+  .countdown-transition { margin-top: 30px; }
   .countdown { min-height: 128px; margin-left: 0; padding: 20px 16px; border-radius: 32px; }
   .countdown-number { font-size: clamp(35px, 8vw, 52px); letter-spacing: -3px; }
   .countdown-label { font-size: 12px; }
@@ -287,7 +349,7 @@ section[id] {
   .event-row > div > div { font-size: 20px; }
   .event-row span { font-size: 14px; }
   .primary-register { align-self: center; }
-  .countdown-transition { margin-top: 96px; translate: 0; transform: none; }
+  .countdown-transition { margin-top: 96px; }
   .countdown-transition::after { display: none; }
   .countdown {
     display: grid;

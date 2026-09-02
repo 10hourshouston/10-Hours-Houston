@@ -53,7 +53,7 @@ function Header() {
   const links = [
     { label: 'About', href: '#about', target: 'about' },
     { label: 'The Burden', href: '#burden', target: 'burden' },
-    { label: 'Schedule', href: '#schedule', target: 'schedule' },
+    { label: 'Schedule', href: '/schedule' },
     { label: 'Panelists', href: '#panelists', target: 'panelists' },
     { label: 'Sponsors', href: '/sponsors' },
   ]
@@ -197,147 +197,6 @@ function Burden() {
   )
 }
 
-const scheduleSteps = [
-  { id: 'arrive', label: 'ARRIVE', desc: 'Doors open. Come as you are.' },
-  { id: 'worship', label: 'WORSHIP', desc: 'Immersive praise and adoration.' },
-  { id: 'word', label: 'WORD', desc: 'Prophetic teaching for the moment.' },
-  { id: 'prayer', label: 'PRAYER', desc: 'Corporate intercession and consecration.' },
-  { id: 'conversations', label: 'CONVERSATIONS', desc: 'Dialogue across disciplines and callings.' },
-  { id: 'commissioning', label: 'COMMISSIONING', desc: 'Sent with fire into every sphere.' },
-]
-
-const experienceMoments = [
-  { src: 'https://images.unsplash.com/photo-1588103715093-4937adcaa4e3?w=900&h=1200&fit=crop&auto=format&q=85', label: 'Prayer & Worship' },
-  { src: '/ai-media-panel-v5.png', label: 'AI & Media Panel' },
-  { src: '/documentary-projector-v2.png', label: 'Documentary' },
-  { src: 'https://images.unsplash.com/photo-1775163560631-6ff15eb2fa1f?w=900&h=1200&fit=crop&auto=format&q=85', label: 'Networking' },
-]
-
-function Schedule() {
-  const [active, setActive] = useState(0)
-  const [shareStatus, setShareStatus] = useState('')
-  const siteUrl = `${window.location.origin}/`
-  const shareText = `You're invited to 10 Hours Houston — 10 hours of worship, prayer, consecration, and commissioning. Join us Saturday, October 31, 2026, from 10:00 AM–8:00 PM at Dominion Chapel Houston, Stafford, TX.`
-  const shareMessage = `${shareText}\n\nRegister and learn more: ${siteUrl}`
-
-  const sharePoster = async () => {
-    try {
-      const response = await fetch('/witnesses-event-poster.jpg')
-      const blob = await response.blob()
-      const poster = new File([blob], '10-hours-houston-poster.jpg', { type: blob.type })
-
-      if (navigator.share && navigator.canShare?.({ files: [poster] })) {
-        await navigator.share({ title: '10 Hours Houston', text: shareMessage, files: [poster] })
-        setShareStatus('Shared')
-      } else if (navigator.share) {
-        await navigator.share({ title: '10 Hours Houston', text: shareMessage })
-        setShareStatus('Shared without image')
-      } else {
-        await navigator.clipboard.writeText(shareMessage)
-        setShareStatus('Sharing unavailable — message copied')
-      }
-    } catch (error) {
-      if (error?.name !== 'AbortError') setShareStatus('Unable to share')
-    }
-  }
-
-  return (
-    <section id="schedule" className="motion-section linked-section bg-[#f7f5f0] px-6 py-24 text-[#171717] md:py-32" aria-labelledby="schedule-heading">
-      <div className="mx-auto max-w-7xl">
-        <p className="section-kicker mb-6 text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">The Experience</p>
-        <h2 id="schedule-heading" className="text-5xl font-bold leading-none tracking-tighter text-[#171717] md:text-7xl lg:text-8xl">
-          10 Hours.<br />
-          One Room.<br />
-          <span className="text-black/25">One Generation.</span>
-        </h2>
-
-        <div className="motion-stagger mt-16 grid grid-cols-2 gap-2 md:mt-20 md:grid-cols-4">
-          {experienceMoments.map((moment) => (
-            <div key={moment.label} className="experience-moment group relative aspect-[3/4] overflow-hidden bg-black/10">
-              <img
-                src={moment.src}
-                alt={moment.label}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <p className="absolute bottom-4 left-4 text-[12px] font-semibold tracking-[0.08em] text-white/75">
-                {moment.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <p className="mx-auto mt-10 max-w-xl text-center text-lg text-black/45">
-          Prayer &amp; Worship. Documentary. AI &amp; Media Panel. Networking. Houston.
-        </p>
-
-        <div className="mt-20 border-t border-black/10 pt-20 md:mt-28 md:pt-28">
-          <p className="section-kicker mb-6 text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">The Schedule</p>
-          <h3 className="mb-16 text-4xl font-bold leading-none tracking-tighter text-[#171717] md:text-6xl">
-            Ten Hours.<br />One Encounter.
-          </h3>
-        </div>
-
-        <div className="motion-stagger grid items-start gap-12 md:grid-cols-2 md:gap-20">
-          <div className="space-y-0">
-            {scheduleSteps.map((step, index) => (
-              <button
-                type="button"
-                key={step.id}
-                className={`timeline-step group flex w-full cursor-pointer gap-6 pb-8 text-left ${active === index ? 'active' : ''}`}
-                onClick={() => setActive(index)}
-                aria-pressed={active === index}
-              >
-                <span className="flex flex-col items-center">
-                  <span
-                    className="step-dot mt-1 h-3 w-3 shrink-0 rounded-full border-2 transition-all duration-300"
-                    style={{
-                      borderColor: active === index ? '#f73301' : 'rgba(0,0,0,0.2)',
-                      background: active === index ? '#f73301' : 'transparent',
-                    }}
-                  />
-                  {index < scheduleSteps.length - 1 && <span className="mt-2 w-px flex-1 bg-black/10" />}
-                </span>
-                <span className="pb-4">
-                  <span className={`mb-1 block text-xs font-semibold tracking-[0.25em] transition-colors duration-300 ${active === index ? 'text-[#f73301]' : 'text-black/45'}`}>
-                    {step.label}
-                  </span>
-                  <span className={`block text-sm leading-relaxed transition-colors duration-300 ${active === index ? 'text-black/75' : 'text-black/35'}`}>
-                    {step.desc}
-                  </span>
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="relative aspect-[4/5] overflow-hidden bg-[#111] shadow-[0_24px_70px_rgba(0,0,0,0.18)]">
-            <img
-              src="/witnesses-event-poster.jpg"
-              alt="10 Hours Houston Witnesses event poster"
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-x-3 bottom-3 border border-white/20 bg-black/55 p-4 text-white shadow-xl backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:p-5">
-              <p className="max-w-xs text-base font-semibold leading-snug sm:text-lg">Know someone who should be at this event?</p>
-              <div className="mt-4 flex items-center justify-between gap-4">
-                <button
-                  type="button"
-                  onClick={sharePoster}
-                  className="inline-flex items-center gap-3 border border-white/50 bg-white/10 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm transition-colors hover:border-[#f73301] hover:bg-[#f73301]"
-                >
-                  Share poster <span className="text-base leading-none">↗</span>
-                </button>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/65" aria-live="polite">{shareStatus}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 const panelistProfiles = [
   {
     id: '1',
@@ -345,13 +204,13 @@ const panelistProfiles = [
     role: 'Founder & Convener',
     org: 'Every Sphere · 10 Hours Houston',
     discipline: 'Convener',
-    bio: `Temitope Ezekiel Ajibola is the founder of Every Sphere and convener of 10 Hours Houston, a gathering devoted to prayer, worship, consecration, and bearing witness to Christ in every sphere of society.
+    bio: `Temitope E. Ajibola is the founder of Every Sphere and convener of 10 Hours Houston. His work brings together spiritual formation, emerging technology, enterprise, and societal responsibility. At the heart of that work is a conviction that those helping to shape the future must themselves be formed with depth, wisdom, and integrity.
 
-He is a technologist, researcher, and entrepreneur whose work spans applied artificial intelligence, blockchain, energy systems, and business transformation. Temitope is a Ph.D. candidate in Electrical and Computer Engineering at Morgan State University, where he researches artificial intelligence and future energy systems.
+His doctoral research in electrical and computer engineering explores artificial intelligence and future energy systems, building upon broader work across AI, blockchain, and business transformation. Rather than treating technology as an end in itself, Temitope is interested in how it can be developed and applied responsibly to strengthen institutions, expand opportunity, and serve society.
 
-He has built ventures and platforms, advised on emerging technologies, and created opportunities for students and emerging builders to develop ideas into practical solutions. His work reflects a continuing interest in how faith, technical excellence, and responsible leadership can wisely shape institutions and serve society.
+Over the years, he has developed ventures, advised on emerging technologies, and built platforms that help people translate ideas into practical solutions. His work has created opportunities for collaboration, innovation, venture development, and professional growth across academic, entrepreneurial, and community settings. These experiences have shaped his understanding of what it takes to move an idea from conviction to execution and sustain meaningful work through changing seasons.
 
-Through Every Sphere and 10 Hours Houston, Temitope seeks to help create spaces where believers can encounter God, recover spiritual depth, and receive clarity for faithful service in their respective fields.`,
+Through Every Sphere and 10 Hours Houston, Temitope helps create spaces where believers can encounter God, recover spiritual depth, and consider what faithful witness requires within their respective fields. His work is guided by a simple commitment: to help build people, platforms, and systems capable of engaging a changing world with Christian conviction, technical understanding, and responsible leadership.`,
     photo: '/temitope-ajibola.png',
     frameColor: '#d8e0e8',
     session: 'Session details coming soon.',
@@ -567,9 +426,9 @@ function PanelistModal({ panelist, onClose }) {
   const frameColor = panelist.frameColor ?? panelistCardColors[(panelistIndex < 0 ? 0 : panelistIndex) % panelistCardColors.length]
 
   return (
-    <div ref={modalRef} className="fixed inset-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="panelist-modal-title">
+    <div ref={modalRef} className="modal-viewport fixed inset-x-0 top-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="panelist-modal-title">
       <button type="button" className="modal-backdrop absolute inset-0 bg-[#171717]/55 backdrop-blur-sm" onClick={onClose} aria-label="Close profile" />
-      <div className="modal-panel linked-section relative z-10 h-[92vh] max-h-[720px] w-full overflow-hidden border border-black/10 bg-[#f7f5f0] text-[#171717] shadow-2xl md:mx-8 md:h-[min(85vh,640px)] md:max-h-none md:max-w-4xl">
+      <div className="modal-panel linked-section relative z-10 w-full overflow-hidden border border-black/10 bg-[#f7f5f0] text-[#171717] shadow-2xl md:mx-8 md:max-w-4xl">
         <button
           type="button"
           onClick={onClose}
@@ -746,8 +605,8 @@ function FinalCta() {
           className="font-bold leading-none tracking-tighter text-white"
           style={{ fontSize: 'clamp(2.75rem, 8vw, 7rem)' }}
         >
-          TAKE YOUR<br />PLACE IN<br />
-          <span className="text-[#f73301]">THE ROOM.</span>
+          Take Your<br />Place in<br />
+          <span className="text-[#f73301]">the Room.</span>
         </h2>
 
         <div className="mt-12">
@@ -848,6 +707,7 @@ function Footer() {
             <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-white/30">When</p>
             <p className="text-sm text-white/65">Saturday, October 31, 2026</p>
             <p className="text-sm text-white/65">10:00 AM — 8:00 PM</p>
+            <a href="/schedule" className="mt-4 inline-flex text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f73301] transition-opacity hover:opacity-75">View full schedule →</a>
           </div>
 
           <div>
@@ -1035,13 +895,12 @@ function HomePage() {
           </a>
         </div>
 
-        <div className="countdown-transition relative mt-[51px] translate-y-24"><Countdown /></div>
+        <div className="countdown-transition relative mt-[51px] translate-y-24 max-[760px]:translate-y-6 max-[520px]:translate-y-0"><Countdown /></div>
       </section>
       </main>
       <Scripture />
       <About />
       <Burden />
-      <Schedule />
       <Panelists />
       <Testimonials />
       <FinalCta />
@@ -1085,6 +944,193 @@ const partnershipOptions = [
   'Vendor & Community Partnership — $2,500',
   'Other',
 ]
+
+const scheduleMovements = {
+  encounter: { numeral: 'I', title: 'Encounter', subtitle: 'Fire and consecration', time: '10:00 AM — 11:45 AM', count: '6 segments' },
+  revelation: { numeral: 'II', title: 'Revelation', subtitle: 'Vision for the mountains', time: '12:05 PM — 1:35 PM', count: '4 segments' },
+  engagement: { numeral: 'III', title: 'Engagement', subtitle: 'Witnessing in the age', time: '2:20 PM — 6:40 PM', count: '8 segments' },
+  commissioning: { numeral: 'IV', title: 'Commissioning', subtitle: 'Deployment into the city', time: '6:40 PM — 8:00 PM', count: '6 segments' },
+}
+
+const scheduleItems = [
+  { movement: 'encounter', time: '10:00 — 10:10 AM', duration: '10 min', type: 'Opening', title: 'Opening Prayer & Call to Worship', description: 'Welcome, theme declaration, and the setting of the spiritual atmosphere.' },
+  { movement: 'encounter', time: '10:10 — 10:35 AM', duration: '25 min', type: 'Worship', title: 'Intense Worship I', description: 'Deep worship, surrender, hunger, and baptism of fire.' },
+  { movement: 'encounter', time: '10:35 — 10:40 AM', duration: '5 min', type: 'Teaching', title: 'Vision & Mission', description: 'Give clarity and establish the mandate for the day.' },
+  { movement: 'encounter', time: '10:40 — 11:10 AM', duration: '30 min', type: 'Prayer', title: 'Consecration', description: 'Repentance, purification, and personal rededication.' },
+  { movement: 'encounter', time: '11:10 — 11:40 AM', duration: '30 min', type: 'Prayer', title: 'Alignment', description: 'Alignment with God’s will for one’s life.' },
+  { movement: 'encounter', time: '11:40 — 11:45 AM', duration: '5 min', type: 'Spoken Word', title: 'Spoken Word', description: 'A creative proclamation of the Witnesses theme through poetry.' },
+  { movement: 'encounter', time: '11:45 AM — 12:05 PM', duration: '20 min', type: 'Interval', title: 'Exhibit Booths · Networking · Coffee', description: 'Explore partner exhibits, build meaningful connections, and enjoy coffee.', interval: true },
+  { movement: 'revelation', time: '12:05 — 12:15 PM', duration: '10 min', type: 'Film', title: 'Documentary', description: 'Explore Christianity’s historical contribution to science and technology, and the Church’s mandate in the modern age.' },
+  { movement: 'revelation', time: '12:15 — 12:35 PM', duration: '20 min', type: 'Teaching', title: 'Introduction — Witnesses', description: 'Establish the theological and cultural meaning of being a witness, and introduce the Spheres of Influence framework.' },
+  { movement: 'revelation', time: '12:35 — 1:05 PM', duration: '30 min', type: 'Prayer', title: 'Prayer Session I — Re-digging Ancient Wells I', description: 'Targeted intercession over selected spheres of influence.' },
+  { movement: 'revelation', time: '1:05 — 1:35 PM', duration: '30 min', type: 'Prayer', title: 'Prayer Session II — Re-digging Ancient Wells II', description: 'Targeted intercession over selected spheres of influence.' },
+  { movement: 'revelation', time: '1:35 — 2:20 PM', duration: '45 min', type: 'Interval', title: 'Lunch', description: 'A shared meal and rest before the afternoon sessions.', interval: true },
+  { movement: 'engagement', time: '2:20 — 2:40 PM', duration: '20 min', type: 'Worship', title: 'Worship II', description: 'Recenter hearts on God and prepare the atmosphere for the afternoon conversations and impartation.' },
+  { movement: 'engagement', time: '2:40 — 3:40 PM', duration: '1 hour', type: 'Panel', title: 'Panel Session I — Witnessing in the AI Age', description: 'Explore how artificial intelligence is reshaping society, and how believers can respond with wisdom, ethics, excellence, and conviction.', featured: true },
+  { movement: 'engagement', time: '3:40 — 3:55 PM', duration: '15 min', type: 'Q & A', title: 'Panel Session I — Questions', description: 'An interactive audience question-and-answer session with the panelists.' },
+  { movement: 'engagement', time: '3:55 — 4:25 PM', duration: '30 min', type: 'Prayer', title: 'Wisdom for the Age', description: 'Prayers for divine wisdom in engaging this age.' },
+  { movement: 'engagement', time: '4:25 — 4:55 PM', duration: '30 min', type: 'Prayer', title: 'Boldness and Audacity', description: 'Prayers for boldness and audacity to thrive in this age.' },
+  { movement: 'engagement', time: '4:55 — 5:15 PM', duration: '20 min', type: 'Interval', title: 'Exhibit Booths · Networking · Coffee', description: 'Explore partner exhibits, build meaningful connections, and enjoy coffee.', interval: true },
+  { movement: 'engagement', time: '5:15 — 5:25 PM', duration: '10 min', type: 'Worship', title: 'Worship III', description: 'A focused moment of worship to renew spiritual attention and prepare hearts for the next session.' },
+  { movement: 'engagement', time: '5:25 — 6:25 PM', duration: '1 hour', type: 'Panel', title: 'Panel Session II — Witnessing with Content', description: 'Examine how media, storytelling, communication, and digital content can communicate truth and shape culture.', featured: true },
+  { movement: 'engagement', time: '6:25 — 6:40 PM', duration: '15 min', type: 'Q & A', title: 'Panel Session II — Questions', description: 'An interactive audience question-and-answer session with the panelists.' },
+  { movement: 'commissioning', time: '6:40 — 6:55 PM', duration: '15 min', type: 'Prayer', title: 'Houston & America’s Prophetic Mandate · Intercession', description: 'Prophetic declarations and intercession concerning Houston’s role in revival, innovation, and global influence, and America’s spiritual destiny.' },
+  { movement: 'commissioning', time: '6:55 — 7:25 PM', duration: '30 min', type: 'Ministry', title: 'Impartation and the Prophetic', description: 'A time of prophetic ministry, prayer, spiritual impartation, commissioning, and activation for Kingdom assignments.' },
+  { movement: 'commissioning', time: '7:25 — 7:35 PM', duration: '10 min', type: 'Ministry', title: 'Testimonies', description: 'Personal accounts of God’s faithfulness and answered prayer.' },
+  { movement: 'commissioning', time: '7:35 — 7:45 PM', duration: '10 min', type: 'Worship', title: 'Praise', description: 'Celebrate God’s faithfulness through joyful praise, thanksgiving, and corporate rejoicing.' },
+  { movement: 'commissioning', time: '7:45 — 7:55 PM', duration: '10 min', type: 'Protocol', title: 'Honor Guests', description: 'Recognize and appreciate invited guests, speakers, partners, sponsors, leaders, and contributors.' },
+  { movement: 'commissioning', time: '7:55 — 8:00 PM', duration: '5 min', type: 'Closing', title: 'Closing', description: 'Final charge, key announcements, next steps, appreciation, closing prayer, and benediction.' },
+]
+
+function SchedulePage() {
+  const [movement, setMovement] = useState('all')
+  const [query, setQuery] = useState('')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  const normalizedQuery = query.trim().toLowerCase()
+  const filteredItems = scheduleItems.filter((item) => {
+    const matchesMovement = movement === 'all' || item.movement === movement
+    const matchesQuery = !normalizedQuery || [item.title, item.type, item.description]
+      .some((value) => value.toLowerCase().includes(normalizedQuery))
+    return matchesMovement && matchesQuery
+  })
+
+  return (
+    <div className="schedule-page min-h-screen bg-[#f4f1eb] text-[#171717]">
+      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#f73301]/35 bg-[#261813]/95 px-6 shadow-[0_10px_32px_rgba(247,51,1,0.10)] backdrop-blur-md md:h-[72px] md:px-10">
+        <a href="/" className="flex shrink-0 items-center" aria-label="10 Hours Houston home">
+          <img className="block h-auto w-[120px]" src="/10-hours-houston-logo.svg" alt="10 Hours Houston" />
+        </a>
+        <div className="flex items-center gap-5">
+          <a href="/" className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/75 transition-colors hover:text-white">← Back to website</a>
+          <a className="hidden bg-[#f73301] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01] sm:inline-flex" href={REGISTER_URL} target="_blank" rel="noreferrer">Register</a>
+        </div>
+      </header>
+
+      <main>
+        <section className="relative overflow-hidden bg-black px-6 pb-20 pt-16 text-white md:pb-28 md:pt-24" aria-labelledby="schedule-page-heading">
+          <BinaryBg opacity={0.045} rows={40} cols={90} speed={60} />
+          <div className="relative mx-auto max-w-7xl">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#f73301]">Program of the Day</p>
+            <div className="mt-7 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <h1 id="schedule-page-heading" className="text-[clamp(3.8rem,10vw,8.5rem)] font-bold leading-[0.82] tracking-[-0.07em]">
+                  The<br /><span className="text-[#f73301]">Schedule.</span>
+                </h1>
+                <p className="mt-10 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
+                  Ten hours. Four movements. One encounter — from worship and consecration to conversation, impartation, and commissioning.
+                </p>
+              </div>
+              <div className="border-l border-white/15 pl-6 text-sm leading-7 text-white/60 lg:mb-2 lg:min-w-72">
+                <p className="font-semibold text-white">Saturday, October 31, 2026</p>
+                <p>10:00 AM — 8:00 PM</p>
+                <p>Dominion Chapel Houston</p>
+                <p>Stafford, Texas</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-6 py-16 md:py-24" aria-label="Event schedule">
+          <div className="mx-auto max-w-7xl">
+            <div className="border-b border-black/15 pb-10">
+              <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-black/40">Find a session</p>
+                  <p className="mt-2 text-sm text-black/55">Search by session name, type, or topic.</p>
+                </div>
+                <label className="relative block w-full md:max-w-md">
+                  <span className="sr-only">Search the schedule</span>
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search the program"
+                    className="h-14 w-full border border-black/20 bg-white px-5 pr-12 text-base outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]"
+                  />
+                  <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-xl text-black/35" aria-hidden="true">⌕</span>
+                </label>
+              </div>
+
+              <div className="schedule-filters mt-8 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filter by movement">
+                <button type="button" onClick={() => setMovement('all')} aria-pressed={movement === 'all'} className={`schedule-filter ${movement === 'all' ? 'is-active' : ''}`}>All program</button>
+                {Object.entries(scheduleMovements).map(([key, item]) => (
+                  <button key={key} type="button" onClick={() => setMovement(key)} aria-pressed={movement === key} className={`schedule-filter ${movement === key ? 'is-active' : ''}`}>
+                    {item.numeral} · {item.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 flex items-center justify-between gap-6">
+              <p className="text-sm font-semibold">Showing {filteredItems.length} {filteredItems.length === 1 ? 'entry' : 'entries'}</p>
+              <p className="text-right text-xs text-black/45">Times are indicative and may shift as the day unfolds.</p>
+            </div>
+
+            <div className="mt-12">
+              {filteredItems.length === 0 ? (
+                <div className="border border-black/10 bg-white px-6 py-16 text-center">
+                  <p className="text-2xl font-semibold">No sessions found.</p>
+                  <button type="button" onClick={() => { setQuery(''); setMovement('all') }} className="mt-5 text-sm font-semibold text-[#f73301] underline underline-offset-4">Clear filters</button>
+                </div>
+              ) : Object.keys(scheduleMovements).map((movementKey) => {
+                const movementItems = filteredItems.filter((item) => item.movement === movementKey)
+                if (!movementItems.length) return null
+                const details = scheduleMovements[movementKey]
+                return (
+                  <section key={movementKey} className="mb-16" aria-labelledby={`movement-${movementKey}`}>
+                    <div className="mb-5 grid gap-4 border-t-2 border-black pt-5 md:grid-cols-[80px_1fr_auto] md:items-end">
+                      <p className="text-lg font-bold text-[#f73301]">{details.numeral}</p>
+                      <div>
+                        <h2 id={`movement-${movementKey}`} className="text-3xl font-bold tracking-[-0.035em] md:text-4xl">{details.title}</h2>
+                        <p className="mt-1 font-serif italic text-black/50">{details.subtitle}</p>
+                      </div>
+                      <div className="text-sm md:text-right">
+                        <p className="font-semibold">{details.time}</p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-black/40">{details.count}</p>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-2">
+                      {movementItems.map((item, index) => (
+                        <article key={`${item.time}-${item.title}`} className={`schedule-card grid gap-6 border border-black/10 p-6 md:grid-cols-[170px_1fr] md:p-8 ${item.interval ? 'is-interval' : ''} ${item.featured ? 'is-featured' : ''}`}>
+                          <div>
+                            <p className="text-sm font-bold tabular-nums">{item.time}</p>
+                            <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/40">{item.duration}</p>
+                          </div>
+                          <div className="relative md:border-l md:border-black/10 md:pl-8">
+                            <p className={`text-[10px] font-semibold uppercase tracking-[0.24em] ${item.featured ? 'text-[#f73301]' : 'text-black/40'}`}>{item.type}</p>
+                            <h3 className="mt-2 text-xl font-semibold leading-tight tracking-[-0.02em] md:text-2xl">{item.title}</h3>
+                            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-black/60 md:text-base">{item.description}</p>
+                            {item.featured && <span className="absolute -left-[5px] top-0 hidden size-[9px] rounded-full bg-[#f73301] md:block" aria-hidden="true" />}
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f73301] px-6 py-16 text-white md:py-20">
+          <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/65">Take your place</p>
+              <h2 className="mt-3 text-4xl font-bold tracking-[-0.045em] md:text-5xl">Be in the room.</h2>
+            </div>
+            <a href={REGISTER_URL} target="_blank" rel="noreferrer" className="inline-flex self-start border border-white bg-white px-8 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#f73301] transition-colors hover:bg-black hover:text-white">Register now →</a>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  )
+}
 
 function SponsorPage() {
   useEffect(() => {
@@ -1196,6 +1242,7 @@ export default function App() {
   const currentPath = window.location.pathname.replace(/\/+$/, '')
   const isSpeakersPage = currentPath === '/speakers'
     || new URLSearchParams(window.location.search).get('view') === 'speakers'
+  if (currentPath === '/schedule') return <SchedulePage />
   if (currentPath === '/sponsors') return <SponsorPage />
   return isSpeakersPage ? <SpeakersPage /> : <HomePage />
 }
