@@ -197,6 +197,55 @@ function Burden() {
   )
 }
 
+const experienceMoments = [
+  { src: 'https://images.unsplash.com/photo-1588103715093-4937adcaa4e3?w=900&h=1200&fit=crop&auto=format&q=85', label: 'Prayer & Worship' },
+  { src: '/ai-media-panel-v5.png', label: 'AI & Media Panel' },
+  { src: '/documentary-projector-v2.png', label: 'Documentary' },
+  { src: 'https://images.unsplash.com/photo-1775163560631-6ff15eb2fa1f?w=900&h=1200&fit=crop&auto=format&q=85', label: 'Networking' },
+]
+
+function Experience() {
+  return (
+    <section id="experience" className="motion-section linked-section bg-[#f7f5f0] px-6 py-24 text-[#171717] md:py-32" aria-labelledby="experience-heading">
+      <div className="mx-auto max-w-7xl">
+        <p className="section-kicker mb-6 text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">The Experience</p>
+        <h2 id="experience-heading" className="text-5xl font-bold leading-none tracking-tighter text-[#171717] md:text-7xl lg:text-8xl">
+          10 Hours.<br />
+          One Room.<br />
+          <span className="text-black/25">One Generation.</span>
+        </h2>
+
+        <div className="motion-stagger mt-16 grid grid-cols-2 gap-2 md:mt-20 md:grid-cols-4">
+          {experienceMoments.map((moment) => (
+            <div key={moment.label} className="experience-moment group relative aspect-[3/4] overflow-hidden bg-black/10">
+              <img
+                src={moment.src}
+                alt={moment.label}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <p className="absolute bottom-4 left-4 text-[12px] font-semibold tracking-[0.08em] text-white/75">
+                {moment.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <a
+            href="/schedule"
+            className="experience-schedule-link inline-flex items-center border border-[#171717] px-7 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors hover:border-[#f73301] hover:bg-[#f73301]"
+          >
+            View Schedule →
+          </a>
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
 const panelistProfiles = [
   {
     id: '1',
@@ -678,7 +727,7 @@ function Footer() {
   const socialLinks = ['Instagram', 'X', 'YouTube', 'LinkedIn']
 
   return (
-    <footer className="border-t border-white/8 bg-black px-6 py-16">
+    <footer className="border-t border-white/8 bg-black px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
@@ -739,6 +788,24 @@ function Footer() {
         </div>
       </div>
     </footer>
+  )
+}
+
+function InnerPageHeader() {
+  return (
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#f73301]/35 bg-[#261813]/95 px-6 shadow-[0_10px_32px_rgba(247,51,1,0.10)] backdrop-blur-md md:h-[72px] md:px-10">
+      <a href="/" className="flex shrink-0 items-center" aria-label="10 Hours Houston home">
+        <img className="sponsor-brand block h-auto w-[120px]" src="/10-hours-houston-logo.svg" alt="10 Hours Houston" />
+      </a>
+      <div className="flex items-center gap-5">
+        <a href="/" className="sponsor-back-link text-[10px] font-semibold uppercase tracking-[0.16em] transition-opacity hover:opacity-75">
+          ← Back Home
+        </a>
+        <a className="sponsor-register hidden bg-[#f73301] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01] sm:inline-flex" href={REGISTER_URL} target="_blank" rel="noreferrer">
+          Register
+        </a>
+      </div>
+    </header>
   )
 }
 
@@ -901,6 +968,7 @@ function HomePage() {
       <Scripture />
       <About />
       <Burden />
+      <Experience />
       <Panelists />
       <Testimonials />
       <FinalCta />
@@ -1000,15 +1068,7 @@ function SchedulePage() {
 
   return (
     <div className="schedule-page min-h-screen bg-[#f4f1eb] text-[#171717]">
-      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#f73301]/35 bg-[#261813]/95 px-6 shadow-[0_10px_32px_rgba(247,51,1,0.10)] backdrop-blur-md md:h-[72px] md:px-10">
-        <a href="/" className="flex shrink-0 items-center" aria-label="10 Hours Houston home">
-          <img className="block h-auto w-[120px]" src="/10-hours-houston-logo.svg" alt="10 Hours Houston" />
-        </a>
-        <div className="flex items-center gap-5">
-          <a href="/" className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/75 transition-colors hover:text-white">← Back to website</a>
-          <a className="hidden bg-[#f73301] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01] sm:inline-flex" href={REGISTER_URL} target="_blank" rel="noreferrer">Register</a>
-        </div>
-      </header>
+      <InnerPageHeader />
 
       <main>
         <section className="relative overflow-hidden bg-black px-6 pb-20 pt-16 text-white md:pb-28 md:pt-24" aria-labelledby="schedule-page-heading">
@@ -1051,7 +1111,17 @@ function SchedulePage() {
                     placeholder="Search the program"
                     className="h-14 w-full border border-black/20 bg-white px-5 pr-12 text-base outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]"
                   />
-                  <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-xl text-black/35" aria-hidden="true">⌕</span>
+                  <svg
+                    className="pointer-events-none absolute right-4 top-1/2 h-[22px] w-[22px] -translate-y-1/2 text-black/40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    aria-hidden="true"
+                  >
+                    <circle cx="10.75" cy="10.75" r="6.75" />
+                    <path d="m16 16 4.25 4.25" />
+                  </svg>
                 </label>
               </div>
 
@@ -1123,7 +1193,7 @@ function SchedulePage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/65">Take your place</p>
               <h2 className="mt-3 text-4xl font-bold tracking-[-0.045em] md:text-5xl">Be in the room.</h2>
             </div>
-            <a href={REGISTER_URL} target="_blank" rel="noreferrer" className="inline-flex self-start border border-white bg-white px-8 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#f73301] transition-colors hover:bg-black hover:text-white">Register now →</a>
+            <a href={REGISTER_URL} target="_blank" rel="noreferrer" className="schedule-register-cta inline-flex self-start border border-white px-8 py-4 text-[11px] font-bold uppercase tracking-[0.2em] transition-colors">Register now →</a>
           </div>
         </section>
       </main>
@@ -1139,24 +1209,12 @@ function SponsorPage() {
 
   return (
     <div className="sponsor-page min-h-screen bg-[#f5f6f7] text-[#171717]">
-      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-[#f73301]/35 bg-[#261813]/95 px-6 shadow-[0_10px_32px_rgba(247,51,1,0.10)] backdrop-blur-md md:h-[72px] md:px-10">
-        <a href="/" className="flex shrink-0 items-center" aria-label="10 Hours Houston home">
-          <img className="sponsor-brand block h-auto w-[120px]" src="/10-hours-houston-logo.svg" alt="10 Hours Houston" />
-        </a>
-        <div className="flex items-center gap-5">
-          <a href="/" className="sponsor-back-link text-[10px] font-semibold uppercase tracking-[0.16em] transition-opacity hover:opacity-75">
-            ← Back to website
-          </a>
-          <a className="sponsor-register hidden bg-[#f73301] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01] sm:inline-flex" href={REGISTER_URL} target="_blank" rel="noreferrer">
-            Register
-          </a>
-        </div>
-      </header>
+      <InnerPageHeader />
 
       <main>
         <section className="px-6 pb-24 pt-10 md:pb-32 md:pt-14" aria-labelledby="sponsor-heading">
           <div className="mx-auto max-w-7xl">
-            <a href="/" className="mb-14 inline-flex text-sm text-black/70 transition-colors hover:text-black md:mb-20">← &nbsp; BACK TO WEBSITE</a>
+            <a href="/" className="mb-14 inline-flex text-sm text-black/70 transition-colors hover:text-black md:mb-20">← &nbsp; BACK HOME</a>
             <div className="grid gap-16 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-24">
               <div>
                 <h1 id="sponsor-heading" className="max-w-md text-[clamp(2.8rem,5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.055em]">

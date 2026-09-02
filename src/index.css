@@ -162,12 +162,26 @@ section[id] {
   border-left: 3px solid #f73301;
 }
 
+.schedule-register-cta {
+  background: #fff;
+  color: #f73301;
+}
+
+.schedule-register-cta:hover {
+  background: #000;
+  color: #fff;
+}
+
 .linked-section,
 .linked-section button,
 .linked-section a,
 .linked-section .font-mono,
 .linked-section .section-kicker {
   font-family: "Instrument Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.experience-schedule-link:hover {
+  color: #fff;
 }
 
 .testimonial-scroll {
