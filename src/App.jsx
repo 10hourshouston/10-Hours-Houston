@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger)
 const EVENT_TIME = new Date('2026-10-31T10:00:00-05:00').getTime()
 const REGISTER_URL = 'https://luma.com/oe8cgk9v'
 const SPONSOR_EMAIL = '10hourshouston@gmail.com'
+const DONATION_URL = 'https://www.zeffy.com/en-US/donation-form/donate-and-partner'
 
 function timeRemaining() {
   const total = Math.max(0, Math.floor((EVENT_TIME - Date.now()) / 1000))
@@ -1482,7 +1483,7 @@ function SponsorPage() {
     }
 
     setFormErrors({})
-    setFormStatus('Your email app is opening with your sponsorship inquiry ready to send.')
+    setFormStatus('Your email app is opening with your partnership inquiry ready to send. Once received, we’ll email you the sponsorship package for your selected tier.')
 
     const subject = encodeURIComponent(`10 Hours Houston Sponsorship Inquiry — ${values.sponsorshipTier}`)
     const body = encodeURIComponent([
@@ -1511,9 +1512,26 @@ function SponsorPage() {
                   We appreciate<br />your interest in<br />partnering<br />with 10 Hours Houston
                 </h1>
                 <p className="mt-12 max-w-sm text-2xl font-normal leading-[1.5] tracking-[-0.025em] text-black/85">
-                  For all partnership opportunities with 10 Hours Houston, please fill out this form.
+                  Select a sponsorship level and send us your details. Once we receive your submission, we’ll email you the sponsorship package with the benefits for your selected tier.
                 </p>
-                <div className="mt-16 max-w-sm border-t border-black/70 pt-10">
+
+                <aside className="mt-12 max-w-sm border-l-4 border-[#f73301] bg-black px-7 py-8 text-white" aria-labelledby="donation-heading">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f73301]">Prefer to give?</p>
+                  <h2 id="donation-heading" className="mt-3 text-2xl font-semibold tracking-[-0.025em]">Support the gathering with a donation.</h2>
+                  <p className="mt-4 text-sm leading-relaxed text-white/65">
+                    If you’d like to contribute without becoming a sponsorship partner, you can make a donation securely through Zeffy.
+                  </p>
+                  <a
+                    href={DONATION_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-7 inline-flex bg-[#f73301] px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01]"
+                  >
+                    Make a donation →
+                  </a>
+                </aside>
+
+                <div className="mt-12 max-w-sm border-t border-black/70 pt-10">
                   <p className="text-base leading-relaxed text-black/65">For general partnership questions:</p>
                   <a href="mailto:contact@10hourshouston.com" className="mt-3 inline-flex text-lg font-semibold underline decoration-1 underline-offset-4 transition-colors hover:text-[#f73301]">
                     contact@10hourshouston.com
@@ -1526,6 +1544,11 @@ function SponsorPage() {
                 noValidate
                 onSubmit={handleSponsorSubmit}
               >
+                <div className="mb-10 border-b border-black/10 pb-8">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f73301]">Partnership inquiry</p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-[-0.035em]">Tell us how you’d like to partner.</h2>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-black/55">After we receive your inquiry, we’ll send the full sponsorship package for the level you select below.</p>
+                </div>
                 <div className="grid gap-9">
                   <label className="grid gap-3 text-lg">
                     <span>Title</span>
@@ -1573,7 +1596,7 @@ function SponsorPage() {
 
                 <div className="mt-12 flex justify-center">
                   <button type="submit" className="min-w-44 bg-[#f73301] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#c42a01]">
-                    Submit
+                    Send inquiry
                   </button>
                 </div>
                 {formStatus && (
