@@ -2,11 +2,13 @@ import { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BinaryBg from './components/BinaryBg'
+import { BLUR_SPEAKER_DETAILS } from './config/feature_flags'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const EVENT_TIME = new Date('2026-10-31T10:00:00-05:00').getTime()
 const REGISTER_URL = 'https://luma.com/oe8cgk9v'
+const SPONSOR_EMAIL = '10hourshouston@gmail.com'
 
 function timeRemaining() {
   const total = Math.max(0, Math.floor((EVENT_TIME - Date.now()) / 1000))
@@ -120,7 +122,7 @@ function Header() {
 
 function Scripture() {
   return (
-    <section className="motion-section bg-white px-6 py-24 md:py-36" aria-labelledby="scripture-heading">
+    <section className="motion-section bg-white px-6 pt-12 pb-16 md:pt-16 md:pb-24" aria-labelledby="scripture-heading">
       <div className="mx-auto max-w-5xl">
         <p id="scripture-heading" className="mb-10 text-[11px] font-medium uppercase tracking-[0.3em] text-black/30">
           Acts 1:8
@@ -225,17 +227,21 @@ function Experience() {
 const panelistProfiles = [
   {
     id: '1',
-    name: 'Temitope Ezekiel Ajibola',
-    role: 'Founder & Convener',
-    org: 'Every Sphere · 10 Hours Houston',
+    name: 'Temitope E. Ajibola',
+    role: 'Convener & Technology Leader',
+    org: '10 Hours Houston',
     discipline: 'Convener',
-    bio: `Temitope E. Ajibola is the founder of Every Sphere and convener of 10 Hours Houston. His work brings together spiritual formation, emerging technology, enterprise, and societal responsibility. At the heart of that work is a conviction that those helping to shape the future must themselves be formed with depth, wisdom, and integrity.
+    bio: `Temitope Ajibola is a faith and technology leader, researcher and entrepreneur working across artificial intelligence, blockchain, energy systems and business transformation.
 
-His doctoral research in electrical and computer engineering explores artificial intelligence and future energy systems, building upon broader work across AI, blockchain, and business transformation. Rather than treating technology as an end in itself, Temitope is interested in how it can be developed and applied responsibly to strengthen institutions, expand opportunity, and serve society.
+He is a doctoral researcher in Electrical and Computer Engineering, where his current work explores AI, blockchain-enabled coordination and distributed energy systems, including peer-to-peer energy markets. His broader research includes explainable AI and smart-contract security, with peer-reviewed publications and intellectual property.
 
-Over the years, he has developed ventures, advised on emerging technologies, and built platforms that help people translate ideas into practical solutions. His work has created opportunities for collaboration, innovation, venture development, and professional growth across academic, entrepreneurial, and community settings. These experiences have shaped his understanding of what it takes to move an idea from conviction to execution and sustain meaningful work through changing seasons.
+Beyond research, Temitope has built and led technology, education and entrepreneurship initiatives that have impacted more than 1,000 students. Participants and alumni from these ecosystems have gone on to opportunities at organizations including Microsoft and Cloudflare, while others have built startups and technical projects.
 
-Through Every Sphere and 10 Hours Houston, Temitope helps create spaces where believers can encounter God, recover spiritual depth, and consider what faithful witness requires within their respective fields. His work is guided by a simple commitment: to help build people, platforms, and systems capable of engaging a changing world with Christian conviction, technical understanding, and responsible leadership.`,
+Through Timeless Venture Group, he also works with organizations on AI, blockchain and business transformation.
+
+His leadership has been recognized through honors including HBCUniverse’s 30 Under 30, the Thurgood Marshall College Fund/Hennessy Fellowship and the Stanford University Innovation Fellowship. His work and perspective have also been featured in God Bless Bitcoin, a documentary exploring faith, money and technology.
+
+Temitope is the founder of Every Sphere and convener of 10 Hours Houston, a Christ-centered gathering calling believers to faithful witness across technology, science, business, media and culture. His work is driven by a conviction that technological advancement and spiritual formation should not develop as separate conversations, but should together shape a generation prepared to enter new frontiers with wisdom, excellence and conviction.`,
     photo: '/temitope-ajibola.png',
     frameColor: '#d8e0e8',
     session: 'Session details coming soon.',
@@ -255,11 +261,14 @@ A Certified Fraud Examiner with a master's degree in Business Analytics from Duk
   },
   {
     id: '3',
-    name: 'Lady VJ',
+    name: 'LADY VJ',
     role: 'Serial Founder',
     org: '',
     discipline: 'Entrepreneurship',
-    bio: 'Biography coming soon.',
+    instagram: '@jokotadeofficial',
+    bio: `LADY VJ is a faith-led serial founder, executive coach, and refinement expert whose work has impacted leaders across more than 100 countries. For over two decades, her journey has allowed her to pioneer multiple thriving ventures across distinct cultural spheres, spanning luxury commerce, modern refinement education, and international media—most notably as the visionary behind NOTIQ, which was later licensed to Target stores nationwide.
+
+Having personally overcome the label of being a "Jack of all trades" to serve leaders at the highest levels, she uses her experience to coach and inspire others to boldly embrace their diverse talents. Lady VJ is deeply passionate about equipping audiences to bridge the gap between technical skill and refined presence, empowering them to step into the marketplace with faith, excellence, and authentic confidence.`,
     photo: '/lady-vj.png',
     frameColor: '#d8d5dc',
     session: 'Session details coming soon.',
@@ -306,9 +315,9 @@ Outside of work, Dinma enjoys sharing knowledge, travelling to new places and sp
     id: '6',
     name: 'Olamide Charles Akinola',
     role: 'Product & Technology Leader',
-    org: 'Former Co-Founder, Mainstack',
+    org: 'Former CPTO, Mainstack',
     discipline: 'Technology',
-    bio: `Olamide Charles Akinola is a product and technology leader, proud Christian, and husband with over a decade of experience building and scaling platforms across fintech, cybersecurity, e-commerce, and the creator economy. He most recently served as Chief Product and Technology Officer and co-founder of Mainstack, a Techstars-backed creator commerce platform used by creators across several countries including the US, UK, Canada, and Nigeria, where he led product strategy and engineering infrastructure through the development of the Mainstack all-in-one platform.
+    bio: `Olamide Charles Akinola is a product and technology leader, proud Christian, and husband with over a decade of experience building and scaling platforms across fintech, cybersecurity, e-commerce, and the creator economy. He most recently served as Chief Product and Technology Officer (CPTO) of Mainstack, a Techstars-backed creator commerce platform used by creators across several countries including the US, UK, Canada, and Nigeria, where he led product strategy and engineering infrastructure through the development of the Mainstack all-in-one platform.
 
 Earlier in his career, he worked at Google, helping develop the Chronicle SecOps platform, and held cybersecurity consulting roles at PwC. Olamide speaks on the intersection of product, security, and AI, and recently joined a panel at New York Tech Week on the existential risks of agentic AI. He brings this same lens to conversations on what it means to build, create, and witness faithfully in an AI-driven world.`,
     photo: '/olamide-charles-akinola.jpg',
@@ -318,7 +327,7 @@ Earlier in his career, he worked at Google, helping develop the Chronicle SecOps
   {
     id: '7',
     name: 'Toun Fadugba',
-    role: 'Convener & Host',
+    role: 'Faith Leader & Host',
     org: 'Fearless Women’s Conference – Houston',
     discipline: 'Ministry',
     bio: `Pastor Toun Fadugba is a multi-faceted leader and the visionary Convener & Host of the Fearless Women’s Conference – Houston. With over 25 years of success in the Oil & Gas industry as an engineer and IT professional, she also channels her creativity as founder of Éclante, a contemporary interior design firm celebrated for its elegance and excellence.
@@ -347,30 +356,107 @@ Beyond the lab, Yemi is the Founder and Lead Director of Morgan TechFest, an ann
   },
   {
     id: '9',
-    name: 'Dee Jones',
-    role: 'Pastor',
-    org: '',
+    name: 'Daniel “Dee” Jones',
+    role: 'Lead Pastor & Media Executive',
+    org: 'The Gathering Houston',
     discipline: 'Ministry',
-    bio: 'Biography coming soon.',
+    bio: `Pastor Daniel “Dee” Jones is a pastor, media executive, worship leader, recording artist, songwriter, music producer and creative director whose work spans ministry, music, media and global culture. He serves as Lead Pastor of The Gathering Houston and Worship Pastor at Dominion Chapel Houston.
+
+Beginning his musical journey at nine, Pastor Dee went on to study Sound Engineering and Music Production at SAE Institute and Middlesex University in the United Kingdom. Over more than two decades, his ministry and creative work have taken him across Africa, Europe, Asia and North America. He has collaborated with internationally recognized artists and ministers, including Sinach, Israel Houghton, Donnie McClurkin, Tye Tribbett and Todd Dulaney.
+
+Pastor Dee produced Sinach’s live recording of the global worship anthem Way Maker and currently serves as Brand Manager for Africa at MultiTracks.com. Through pastoral leadership and creative production, he demonstrates how spiritual conviction, technical excellence and thoughtful communication can work together to carry a message across cultures and generations.`,
     photo: '/dee-jones.jpg',
     frameColor: '#d9c8b7',
     session: 'Session details coming soon.',
   },
   {
+    id: '11',
+    name: 'Erezi Umuakpero',
+    role: 'Administrative Pastor & Worship Leader',
+    org: 'The Gathering Houston · TEDx Speaker',
+    discipline: 'Ministry',
+    bio: `Pastor Erezi Umuakpero is a pastor, worship minister, teacher, TEDx speaker and certified life coach committed to helping people encounter God, discover their voices and grow into mature followers of Christ. He serves as Administrative Pastor at The Gathering Houston, contributing to the spiritual formation, pastoral care and development of its community.
+
+His ministry is grounded in the conviction that worship is more than music—it is a life of surrender, reverence and wholehearted devotion to God. Whether leading worship, teaching Scripture or speaking publicly, Pastor Erezi communicates with sincerity, clarity and a desire to move people toward meaningful transformation.
+
+In his TEDxRiceU talk, Break the Silence, he challenged individuals to overcome fear and find the courage to speak up. Across both ministry and public communication, his work reflects a passion for helping people live with faith, purpose and conviction.`,
+    photo: '/erezi-umuakpero.jpg',
+    frameColor: '#d8d2d0',
+    session: 'Session details coming soon.',
+  },
+  {
     id: '10',
     name: 'Yewande Ifanse',
-    role: 'Panelist',
+    role: 'Speaker | Spoken Word Artist',
     org: '',
-    discipline: 'Panelist',
-    bio: 'Biography coming soon.',
+    discipline: 'Spoken Word',
+    bio: `Yewande is a spoken word artist, licensed financial professional, health care professional and serial entrepreneur- CEO of Yumbyye Cake Artistry and Audacious Legacy LLC. With her background in healthcare she understands how fragile life is and is devoted to helping others live boldly and intentionally. Yewande empowers individuals and families through financial literacy and practical action steps to create a financially resilient life they love. At the heart of everything Yewande does is a deep passion for people, purpose, and impact. She believes everyone deserves the freedom to create a life they truly love—and should have the audacity to pursue it, live it, and leave a legacy that inspires generations.`,
     photo: '/yewande-ifanse.jpg',
     frameColor: '#e9dfd2',
-    emphasizePhoto: true,
+    session: 'Session details coming soon.',
+  },
+  {
+    id: '12',
+    name: 'John Alimi',
+    role: 'Serial Founder',
+    org: 'Stanford PhD Candidate',
+    discipline: 'Entrepreneurship',
+    bio: `John Alimi holds a bachelor's degree in mechanical engineering from the University of Bradford and a master of philosophy in industrial systems, manufacture and management from the University of Cambridge, where he received the Frederick Alfred Warren Prize for academic excellence. He is now a PhD candidate in Management Science and Engineering at Stanford.
+
+His work has spanned affordable healthcare innovations and smart water systems built to address global water scarcity. He co-founded Loopify to equip underserved African small businesses with digital tools, and launched the UK government-backed Young Innovators programme, building digital and entrepreneurial skills among at-risk youth in London. He is currently building in AI.
+
+He is the son of pastors, and grew up behind a keyboard in his parents' church.`,
+    photo: '/john-alimi.jpeg',
+    frameColor: '#d4dce4',
+    session: 'Session details coming soon.',
+  },
+  {
+    id: '13',
+    name: 'Joy Uyo Adejo',
+    role: 'Founder | Worship Leader',
+    org: 'Light-ED Africa · You Can Heal Global',
+    discipline: 'Ministry',
+    bio: `Joy Uyo Adejo is a Communications Consultant by profession, an award winning singer-songwriter and an Author. She is the founder of Light-ED Africa, Co-Founder of Safe and Whole Maternal Wellness and the Steward over You Can Heal Global, a ministry dedicated to revealing the Love of Jesus Christ and the Power of The Holy Spirit in bringing healing and restoration to the total man, spirit, soul and body. This is through programs such as The Healing Ground, You Can Heal Conference as well as platforms like The Prayer Partners and Healing Streams podcast on YouTube.
+
+Joy is committed to the work of The Gospel of Jesus Christ, a worshipper, a woman of prayer and a student of The Word.`,
+    photo: '/joy-uyo-adejo.jpg',
+    frameColor: '#dde7d8',
+    session: 'Session details coming soon.',
+  },
+  {
+    id: '14',
+    name: 'Manji Dandam',
+    role: 'Worship Leader | Registered Nurse',
+    org: '',
+    discipline: 'Ministry',
+    bio: `Manji Dandam is a worship minister and registered nurse whose life is shaped by a single, consuming conviction: to make Jesus proud, and to draw all men into Him with everything her hands have been blessed to do.
+
+Born in Jos and raised in Lagos, Nigeria, and now based in Houston, Manji carries both a healer's heart and a worshipper's spirit into everything she does. By profession, she cares for patients as a Registered Nurse; by calling, she leads God's people into His presence through worship, a ministry marked by a posture of humility and reverence that consistently draws attention away from the platform and fixes it on Christ.
+
+As the middle of three girls, Manji often points to that upbringing as the root of the servant's heart now visible in her ministry — one shaped as much in hospital rooms as on the worship stage, and equally at home in both.`,
+    photo: '/manji-dandam.png',
+    frameColor: '#e3d9cc',
+    session: 'Session details coming soon.',
+  },
+  {
+    id: '15',
+    name: 'Oreoluwa Otunbanjo',
+    role: 'Creator',
+    org: 'Makeup Classes by Ore',
+    discipline: 'Media',
+    bio: `Oreoluwa Otunbanjo, known to her audience as Ore Otun, is a creator and makeup artist based in Houston, Texas.
+
+Her work reaches more than 150,000 people and has been watched and shared millions of times. She built it in the beauty space, teaching technique in plain language to women who wanted to learn properly rather than be impressed. She has since turned that into a school, teaching one-to-one, in groups and online through Makeup Classes by Ore.
+
+Alongside the tutorials she publishes on church, faith, dating and ordinary life.`,
+    photo: '/oreoluwa-otunbanjo.JPEG',
+    frameColor: '#e8dce0',
     session: 'Session details coming soon.',
   },
 ]
 
-const panelistOrder = ['1', '7', '3', '9', '4', '8', '2', '6', '5', '10']
+// Convener first, then flyer order (top-left → bottom-right), then remaining speakers
+const panelistOrder = ['1', '7', '9', '3', '11', '8', '4', '2', '5', '6', '12', '15', '10', '13', '14']
 const panelists = panelistOrder
   .map((id) => panelistProfiles.find((panelist) => panelist.id === id))
   .filter(Boolean)
@@ -382,8 +468,8 @@ function PanelistPortraitFrame({ panelist, className = '', children }) {
     <span className={`relative block aspect-[4/5] overflow-hidden bg-black/10 ${className}`}>
       <img
         src={panelist.photo}
-        alt={panelist.name}
-        className={`h-full w-full object-cover object-top transition-transform duration-700 ${panelist.emphasizePhoto ? 'scale-[1.2] group-hover:scale-[1.235]' : 'group-hover:scale-[1.035]'}`}
+        alt={BLUR_SPEAKER_DETAILS ? '' : panelist.name}
+        className={`h-full w-full object-cover object-top transition-[filter,transform] duration-700 ${BLUR_SPEAKER_DETAILS ? 'speaker-photo-blurred' : (panelist.emphasizePhoto ? 'scale-[1.2] group-hover:scale-[1.235]' : 'group-hover:scale-[1.035]')}`}
         loading="lazy"
       />
       {children}
@@ -398,14 +484,14 @@ function PanelistCard({ panelist, onSelect, index }) {
       onClick={onSelect}
       className="panelist-card group flex min-w-0 flex-col p-3 text-left text-[#171717] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(0,0,0,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f73301] md:p-4"
       style={{ backgroundColor: panelist.frameColor ?? panelistCardColors[index % panelistCardColors.length] }}
-      aria-label={`View ${panelist.name} profile`}
+      aria-label={BLUR_SPEAKER_DETAILS ? 'View speaker profile' : `View ${panelist.name} profile`}
     >
       <PanelistPortraitFrame panelist={panelist} className="w-full" />
 
       <span className="flex min-h-[142px] flex-1 flex-col px-1 pb-1 pt-5 md:min-h-[154px]">
-        <strong className="block text-xl font-semibold leading-[1.05] tracking-[-0.03em] md:text-2xl">{panelist.name}</strong>
-        <span className="mt-3 block text-sm font-medium leading-snug text-black/65">{panelist.role}</span>
-        <span className="mt-0.5 block text-xs leading-snug text-black/45">{panelist.org}</span>
+        <strong className={`block text-xl font-semibold leading-[1.05] tracking-[-0.03em] md:text-2xl ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.name}</strong>
+        <span className={`mt-3 block text-sm font-medium leading-snug text-black/65 ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.role}</span>
+        <span className={`mt-0.5 block text-xs leading-snug text-black/45 ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.org}</span>
         <span className="mt-auto flex items-center justify-between border-t border-black/10 pt-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/60">
           View profile <span className="text-base leading-none text-[#f73301] transition-transform duration-300 group-hover:translate-x-1">→</span>
         </span>
@@ -451,7 +537,14 @@ function PanelistModal({ panelist, onClose }) {
   const frameColor = panelist.frameColor ?? panelistCardColors[(panelistIndex < 0 ? 0 : panelistIndex) % panelistCardColors.length]
 
   return (
-    <div ref={modalRef} className="modal-viewport fixed inset-x-0 top-0 z-[100] flex items-end justify-center md:items-center" role="dialog" aria-modal="true" aria-labelledby="panelist-modal-title">
+    <div
+      ref={modalRef}
+      className="modal-viewport fixed inset-x-0 top-0 z-[100] flex items-end justify-center md:items-center"
+      role="dialog"
+      aria-modal="true"
+      aria-label={BLUR_SPEAKER_DETAILS ? 'Speaker profile' : undefined}
+      aria-labelledby={BLUR_SPEAKER_DETAILS ? undefined : 'panelist-modal-title'}
+    >
       <button type="button" className="modal-backdrop absolute inset-0 bg-[#171717]/55 backdrop-blur-sm" onClick={onClose} aria-label="Close profile" />
       <div className="modal-panel linked-section relative z-10 w-full overflow-hidden border border-black/10 bg-[#f7f5f0] text-[#171717] shadow-2xl md:mx-8 md:max-w-4xl">
         <button
@@ -477,17 +570,33 @@ function PanelistModal({ panelist, onClose }) {
           <div className="flex min-h-0 px-8 py-10 md:px-10 md:py-14">
             <div className="panelist-modal-scroll flex min-h-0 flex-1 flex-col justify-between overflow-y-auto pr-2">
               <div>
-                <h2 id="panelist-modal-title" className="text-3xl font-bold leading-tight tracking-tight md:text-4xl">{panelist.name}</h2>
-                <p className="mt-2 text-sm font-medium text-[#f73301]">{panelist.role}</p>
-                <p className="mt-0.5 text-sm text-black/50">{panelist.org}</p>
+                <h2 id="panelist-modal-title" className={`text-3xl font-bold leading-tight tracking-tight md:text-4xl ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.name}</h2>
+                <p className={`mt-2 text-sm font-medium text-[#f73301] ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.role}</p>
+                {panelist.org && <p className={`mt-0.5 text-sm text-black/50 ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.org}</p>}
                 <div className="mt-8 border-t border-black/10 pt-8">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40">Biography</p>
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-black/70">{panelist.bio}</p>
+                  <p className={`whitespace-pre-line text-sm leading-relaxed text-black/70 ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`} aria-hidden={BLUR_SPEAKER_DETAILS}>{panelist.bio}</p>
                 </div>
                 <div className="mt-8 border-t border-black/10 pt-8">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40">Session</p>
                   <p className="font-medium leading-snug text-black">{panelist.session}</p>
                 </div>
+                {panelist.instagram && (
+                  <div className="mt-8 border-t border-black/10 pt-6">
+                    <a
+                      href={`https://instagram.com/${panelist.instagram.replace(/^@/, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group inline-flex items-center gap-2 text-sm font-medium text-black/15 transition-colors duration-200 hover:text-black/35 ${BLUR_SPEAKER_DETAILS ? 'speaker-detail-blurred' : ''}`}
+                      aria-hidden={BLUR_SPEAKER_DETAILS}
+                      title={panelist.instagram}
+                      aria-label={`${panelist.name} on Instagram (${panelist.instagram})`}
+                    >
+                      <SocialIcon name="Instagram" className="size-5 shrink-0 text-black/45 transition-colors duration-200 group-hover:text-black/75" />
+                      <span className="text-black/45 transition-colors duration-200 group-hover:text-black/75">{panelist.instagram}</span>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -552,71 +661,171 @@ function Panelists({ showAll = false }) {
 
 const testimonials = [
   {
-    quote: 'This gathering changed how I understood my responsibility as a believer. I left knowing my career was my calling.',
-    name: 'Marcus B.',
-    role: 'Software Engineer',
-    city: 'Atlanta, GA',
+    quote:
+      'These days of prayer are activating a different me. I can feel the change in my peace, confidence and spiritual awareness, and even people around me are saying something is different about me. This journey is not just changing how I pray — it is changing who I am becoming.',
+    name: 'Gideon N.',
+    role: 'Startup Founder',
+    city: 'San Francisco, California',
+    program: 'SHIFT 90 Days',
   },
+
   {
-    quote: 'For the first time I sat in a room that believed what I believed — that excellence in my field was an act of faith.',
-    name: 'Danielle W.',
-    role: 'Physician',
-    city: 'Dallas, TX',
+    quote:
+      'During the 120 days, God gave me a revelation that shifted something deeply within me and drew me into a new level of prayer. Since then, I have seen His faithfulness in remarkable ways — renewed boldness to serve Him, the blessing of a car, graduating at the top of my graduate class, and receiving a new job. This journey has strengthened my faith and reminded me that God is truly faithful.',
+    name: 'Okelue C.',
+    role: 'Engineer',
+    city: 'Houston',
+    program: 'SHIFT 120 Days',
   },
+
   {
-    quote: '10 Hours gave me language for something I had felt my whole life. I am a witness. My work is my witness.',
-    name: 'Jordan K.',
-    role: 'Film Director',
-    city: 'Los Angeles, CA',
+    quote:
+      'Because of SHIFT, my prayer life has taken a leap! I’ve grown in intensity, consistency, and perseverance in prayer. I’ve also experienced the joy of standing in the gap for others and witnessing incredible breakthroughs—doors that had been delayed for several years suddenly opening. SHIFT has deepened my faith and transformed how I approach prayer, intercession, and trusting God.',
+    name: 'Omasan O.',
+    role: 'Administrator',
+    city: 'Houston',
+    program: '24 Hours Stretch',
   },
+
   {
-    quote: "The conversations in that room were the most important I've had in years. This is the church showing up to the future.",
-    name: 'Ife A.',
-    role: 'Venture Capitalist',
-    city: 'Houston, TX',
+    quote:
+      'The 48 Hours Retreat was definitely a God-orchestrated moment that redefined my entrance into 2026. It restored hope in specific areas of my life where I had lost it, reignited my hunger for fervent, heartfelt prayer and sharpened my prophetic sensitivity to see and hear more clearly. It became my personal crossover — a spiritual reset that propelled me forward, confirmed through a series of dreams afterward.',
+    name: 'Gift O.',
+    role: 'Medical Laboratory Scientist',
+    city: 'Houston',
+    program: '48 Hours Stretch',
   },
-]
+
+  {
+    quote:
+      'The 48 hours of prayer became a powerful turning point in my life. God opened doors and opportunities I never expected, connected me with the right mentors and people, and gave me the wisdom and clarity to start two growing companies. I experienced breakthroughs, chains were broken, and my vision became clearer. This journey didn’t just change my prayers — it changed my direction and deepened my trust in God.',
+    name: 'Precious O.',
+    role: '',
+    city: 'Houston, Texas',
+    program: '48 Hours Stretch',
+  },
+
+  {
+    quote:
+      'SHIFT 120 became a foundation for my year. I joined at a time when I felt overwhelmed and my prayer life had grown weak, but through the journey, God revived my hunger for Him and deepened my spiritual sensitivity. My relationship with God has been transformed, and I also found a community of people who have become family. I am deeply grateful to have been part of SHIFT 120.',
+    name: 'Linda O.',
+    role: 'Healthcare Professional',
+    city: 'New Jersey',
+    program: 'SHIFT 120 Days',
+  },
+];
+
+function TestimonialModal({ testimonial, onClose }) {
+  if (!testimonial) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Testimonial from ${testimonial.name}`}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-xl bg-white p-10 shadow-2xl md:p-14"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center text-black/40 transition-colors hover:text-black"
+          aria-label="Close"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <p className="text-5xl font-bold leading-none text-[#f73301]" aria-hidden="true">"</p>
+        <blockquote className="mt-4 text-lg font-normal leading-relaxed text-black/80 md:text-xl">
+          {testimonial.quote}
+        </blockquote>
+        <footer className="mt-8 border-t border-black/10 pt-6">
+          <p className="text-sm font-semibold text-black">{testimonial.name}</p>
+          <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.15em] text-black/40">
+            {testimonial.role}{testimonial.role && ' — '}{testimonial.city}
+          </p>
+          {testimonial.program && (
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.15em] text-[#f73301]/70">
+              {testimonial.program}
+            </p>
+          )}
+        </footer>
+      </div>
+    </div>
+  );
+}
 
 function Testimonials() {
-  return (
-    <section id="testimonials" className="motion-section linked-section overflow-hidden border-t border-black/10 bg-[#f4f1eb] py-24 text-[#171717] md:py-32" aria-labelledby="testimonials-heading">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="section-kicker text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">
-          From Previous Gatherings
-        </p>
-        <h2 id="testimonials-heading" className="mt-6 max-w-3xl text-4xl font-bold leading-none tracking-tighter md:text-6xl">
-          Stories from<br />other Rooms
-        </h2>
-      </div>
+  const [selected, setSelected] = useState(null);
 
-      <div
-        className="testimonial-scroll mt-14 flex gap-3 overflow-x-auto px-6 pb-4 md:mt-20"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        <div className="motion-stagger mx-auto flex w-max max-w-none gap-3 md:pl-[max(0px,calc((100vw-80rem)/2))]">
-          {testimonials.map((testimonial) => (
-            <article
-              key={testimonial.name}
-              className="flex min-h-[330px] w-[min(82vw,480px)] shrink-0 flex-col justify-between border border-black/10 bg-white p-8 shadow-[0_12px_35px_rgba(0,0,0,0.04)] md:p-12"
-            >
-              <div>
-                <p className="text-5xl font-bold leading-none text-[#f73301]" aria-hidden="true">“</p>
-                <blockquote className="mt-4 text-xl font-normal leading-snug text-black/80 md:text-2xl">
-                  {testimonial.quote}
-                </blockquote>
-              </div>
-              <footer className="mt-10 border-t border-black/10 pt-6">
-                <p className="text-sm font-semibold text-black">{testimonial.name}</p>
-                <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.15em] text-black/40">
-                  {testimonial.role} — {testimonial.city}
-                </p>
-              </footer>
-            </article>
-          ))}
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => { if (e.key === 'Escape') setSelected(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selected]);
+
+  return (
+    <>
+      <section id="testimonials" className="motion-section linked-section overflow-hidden border-t border-black/10 bg-[#f4f1eb] py-24 text-[#171717] md:py-32" aria-labelledby="testimonials-heading">
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="section-kicker text-[11px] font-medium uppercase tracking-[0.3em] text-black/45">
+            From Previous Gatherings
+          </p>
+          <h2 id="testimonials-heading" className="mt-6 max-w-3xl text-4xl font-bold leading-none tracking-tighter md:text-6xl">
+            Stories from<br />other Rooms
+          </h2>
         </div>
-      </div>
-    </section>
-  )
+
+        <div
+          className="testimonial-scroll mt-14 flex gap-3 overflow-x-auto px-6 pb-4 md:mt-20"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          <div className="motion-stagger mx-auto flex w-max max-w-none gap-3 md:pl-[max(0px,calc((100vw-80rem)/2))]">
+            {testimonials.map((testimonial) => (
+              <article
+                key={testimonial.name}
+                onClick={() => setSelected(testimonial)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelected(testimonial); }}
+                aria-label={`Read full testimonial from ${testimonial.name}`}
+                className="group flex min-h-[330px] w-[min(82vw,480px)] shrink-0 cursor-pointer flex-col justify-between border border-black/10 bg-white p-8 shadow-[0_12px_35px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-[0_16px_45px_rgba(0,0,0,0.1)] md:p-12"
+              >
+                <div className="min-h-0 flex-1 overflow-hidden">
+                  <p className="text-5xl font-bold leading-none text-[#f73301]" aria-hidden="true">"</p>
+                  <blockquote
+                    className="mt-4 text-xl font-normal leading-snug text-black/80 md:text-2xl"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitLineClamp: 4,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {testimonial.quote}
+                  </blockquote>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-[#f73301] opacity-0 transition-opacity group-hover:opacity-100">
+                    Read more →
+                  </p>
+                </div>
+                <footer className="mt-10 border-t border-black/10 pt-6">
+                  <p className="text-sm font-semibold text-black">{testimonial.name}</p>
+                  <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.15em] text-black/40">
+                    {testimonial.role}{testimonial.role && ' — '}{testimonial.city}
+                  </p>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <TestimonialModal testimonial={selected} onClose={() => setSelected(null)} />
+    </>
+  );
 }
 
 function FinalCta() {
@@ -655,9 +864,9 @@ function FinalCta() {
   )
 }
 
-function SocialIcon({ name }) {
+function SocialIcon({ name, className = 'h-5 w-5' }) {
   const commonProps = {
-    className: 'h-5 w-5',
+    className,
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
@@ -675,10 +884,18 @@ function SocialIcon({ name }) {
     )
   }
 
-  if (name === 'X') {
+  if (name === 'TikTok') {
     return (
       <svg {...commonProps} fill="currentColor" stroke="none">
-        <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.48 22H3.36l7.26-8.3L2.98 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.73L8.44 4.05H6.58L17.8 19.84Z" />
+        <path d="M15.6 3c.32 2.22 1.57 3.55 3.74 3.69v3.15a8.4 8.4 0 0 1-3.7-.86v6.1a5.92 5.92 0 1 1-5.1-5.87v3.2a2.75 2.75 0 1 0 1.91 2.67V3h3.15Z" />
+      </svg>
+    )
+  }
+
+  if (name === 'Facebook') {
+    return (
+      <svg {...commonProps} fill="currentColor" stroke="none">
+        <path d="M13.7 21v-8h2.7l.4-3.1h-3.1V7.93c0-.9.25-1.51 1.56-1.51h1.67V3.63a22.3 22.3 0 0 0-2.43-.13c-2.4 0-4.05 1.47-4.05 4.16V9.9H7.73V13h2.72v8h3.25Z" />
       </svg>
     )
   }
@@ -700,7 +917,13 @@ function SocialIcon({ name }) {
 }
 
 function Footer() {
-  const socialLinks = ['Instagram', 'X', 'YouTube', 'LinkedIn']
+  const socialLinks = [
+    { name: 'Instagram', href: 'https://www.instagram.com/10hourshouston' },
+    { name: 'Facebook', href: 'https://www.facebook.com/share/1J3EpML7BD/?mibextid=wwXIfr' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/10-hours-houston/' },
+    { name: 'YouTube', href: '#' },
+    { name: 'TikTok', href: 'https://www.tiktok.com/@10hourshouston' },
+  ]
 
   return (
     <footer className="border-t border-white/8 bg-black px-6 py-16 text-white">
@@ -737,22 +960,24 @@ function Footer() {
 
           <div>
             <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-white/30">Contact</p>
-            <a href="mailto:hello@10hourshouston.com" className="mb-6 block text-sm text-white/50 transition-colors hover:text-white">
-              hello@10hourshouston.com
+            <a href="mailto:contact@10hourshouston.com" className="mb-6 block text-sm text-white/50 transition-colors hover:text-white">
+              contact@10hourshouston.com
             </a>
             <a href="/sponsors" className="mb-6 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#f73301] transition-opacity hover:opacity-75">
               Partner with us →
             </a>
             <div className="flex gap-4">
-              {socialLinks.map((social) => (
+              {socialLinks.map(({ name, href }) => (
                 <a
-                  key={social}
-                  href="#"
-                  aria-label={social}
-                  title={social}
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={name}
+                  title={name}
                   className="text-white/30 transition-colors hover:text-white"
                 >
-                  <SocialIcon name={social} />
+                  <SocialIcon name={name} />
                 </a>
               ))}
             </div>
@@ -796,7 +1021,7 @@ function HomePage() {
     video.muted = true
     video.defaultMuted = true
     video.playsInline = true
-    video.playbackRate = 0.65
+    video.playbackRate = 1
 
     const startPlayback = () => {
       if (document.visibilityState === 'hidden') return
@@ -892,29 +1117,29 @@ function HomePage() {
 
   return (
     <div ref={appRef}>
-      <main id="home" className="page-shell relative flex min-h-screen min-h-[100svh] items-center overflow-hidden bg-black py-24 text-white md:py-28">
+      <main id="home" className="page-shell relative flex min-h-screen min-h-[100svh] items-center overflow-hidden bg-black pt-20 pb-4 text-white md:pt-24 md:pb-6">
       <div className="absolute inset-0" aria-hidden="true">
         <video
           ref={heroVideoRef}
-          className="h-full w-full scale-[1.9] object-cover opacity-60"
+          className="h-full w-full scale-105 object-cover"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
         >
-          <source src="/video/houston-2.mp4" type="video/mp4" />
+          <source src="/video/10HoursHouston-new.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/65 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/65 to-black/50" />
       </div>
 
       <div className="dot-field dot-field-left" aria-hidden="true" />
       <div className="dot-field dot-field-right" aria-hidden="true" />
       <Header />
 
-      <section className="hero relative z-10 mx-auto w-full max-w-[1175px] px-0" aria-labelledby="hero-title">
+      <section className="hero relative z-10 mx-auto w-full max-w-[1175px] mt-24 px-0" aria-labelledby="hero-title">
         <h1 id="hero-title" className="sr-only">Witnesses</h1>
-        <img className="witnesses-art" src="/witnesses-logo-white-clean.png" alt="Witnesses" />
+        <img className="witnesses-art" src="/witnesses-white.png" alt="Witnesses" />
 
         <p className="tagline ml-[17px] mt-[18px] text-[28px] font-semibold tracking-[-0.8px]">
           10 hours of worship, prayer, consecration, and commissioning.
@@ -928,7 +1153,7 @@ function HomePage() {
           <span>Media</span>
         </div>
 
-        <div className="event-row ml-[17px] mt-[96px] flex items-center">
+        <div className="event-row ml-[17px] mt-10 flex items-center md:mt-14 md:mb-24">
           <div className="flex flex-col">
             <div className="text-[24px] font-semibold leading-[1.12]">Saturday, October 31, 2026</div>
             <span className="text-[18px] leading-[1.28] font-normal mt-2">10:00 AM – 8:00 PM · Houston, Texas</span>
@@ -938,7 +1163,7 @@ function HomePage() {
           </a>
         </div>
 
-        <div className="countdown-transition relative mt-[51px] translate-y-24 max-[760px]:translate-y-6 max-[520px]:translate-y-0"><Countdown /></div>
+        <div className="countdown-transition relative mt-6 md:mt-8"><Countdown /></div>
       </section>
       </main>
       <Scripture />
@@ -981,12 +1206,40 @@ function SpeakersPage() {
   )
 }
 
-const partnershipOptions = [
-  'Event Sponsorship — $10,000',
-  'Church & Ministry Partnership — $5,000',
-  'Vendor & Community Partnership — $2,500',
-  'Other',
+const sponsorshipTiers = [
+  'Bronze — $2,000',
+  'Silver — $3,000',
+  'Gold — $5,000',
+  'Diamond — $15,000+',
 ]
+
+const sponsorNamePattern = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’\-]*$/u
+const sponsorEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+function cleanSponsorValue(value) {
+  return String(value ?? '').trim().replace(/\s+/g, ' ')
+}
+
+function validateSponsorForm(values) {
+  const errors = {}
+
+  if (values.firstName.length < 2 || !sponsorNamePattern.test(values.firstName)) {
+    errors.firstName = 'Enter a valid first name.'
+  }
+  if (values.lastName.length < 2 || !sponsorNamePattern.test(values.lastName)) {
+    errors.lastName = 'Enter a valid last name.'
+  }
+  if (values.title.length < 2) errors.title = 'Enter your professional title.'
+  if (values.company.length < 2) errors.company = 'Enter your company or organization.'
+  if (values.email.length > 254 || !sponsorEmailPattern.test(values.email)) {
+    errors.email = 'Enter a valid email address.'
+  }
+  if (!sponsorshipTiers.includes(values.sponsorshipTier)) {
+    errors.sponsorshipTier = 'Select a sponsorship level.'
+  }
+
+  return errors
+}
 
 const scheduleMovements = {
   encounter: { numeral: 'I', title: 'Encounter', subtitle: 'Fire and consecration', time: '10:00 AM — 11:45 AM', count: '6 segments' },
@@ -1178,9 +1431,60 @@ function SchedulePage() {
 }
 
 function SponsorPage() {
+  const [formErrors, setFormErrors] = useState({})
+  const [formStatus, setFormStatus] = useState('')
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  const clearFieldError = (event) => {
+    const { name } = event.currentTarget
+    setFormErrors((current) => {
+      if (!current[name]) return current
+      const next = { ...current }
+      delete next[name]
+      return next
+    })
+    setFormStatus('')
+  }
+
+  const handleSponsorSubmit = (event) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const values = {
+      firstName: cleanSponsorValue(data.get('firstName')),
+      lastName: cleanSponsorValue(data.get('lastName')),
+      title: cleanSponsorValue(data.get('title')),
+      company: cleanSponsorValue(data.get('company')),
+      email: cleanSponsorValue(data.get('email')).toLowerCase(),
+      sponsorshipTier: cleanSponsorValue(data.get('sponsorshipTier')),
+    }
+    const errors = validateSponsorForm(values)
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      setFormStatus('Please correct the highlighted fields.')
+      form.elements[Object.keys(errors)[0]]?.focus()
+      return
+    }
+
+    setFormErrors({})
+    setFormStatus('Your email app is opening with your sponsorship inquiry ready to send.')
+
+    const subject = encodeURIComponent(`10 Hours Houston Sponsorship Inquiry — ${values.sponsorshipTier}`)
+    const body = encodeURIComponent([
+      `First Name: ${values.firstName}`,
+      `Last Name: ${values.lastName}`,
+      `Title: ${values.title}`,
+      `Company: ${values.company}`,
+      `Email: ${values.email}`,
+      `Sponsorship Tier: ${values.sponsorshipTier}`,
+    ].join('\n'))
+
+    window.location.href = `mailto:${SPONSOR_EMAIL}?subject=${subject}&body=${body}`
+  }
 
   return (
     <div className="sponsor-page min-h-screen bg-[#f5f6f7] text-[#171717]">
@@ -1200,59 +1504,53 @@ function SponsorPage() {
                 </p>
                 <div className="mt-16 max-w-sm border-t border-black/70 pt-10">
                   <p className="text-base leading-relaxed text-black/65">For general partnership questions:</p>
-                  <a href="mailto:hello@10hourshouston.com" className="mt-3 inline-flex text-lg font-semibold underline decoration-1 underline-offset-4 transition-colors hover:text-[#f73301]">
-                    hello@10hourshouston.com
+                  <a href="mailto:contact@10hourshouston.com" className="mt-3 inline-flex text-lg font-semibold underline decoration-1 underline-offset-4 transition-colors hover:text-[#f73301]">
+                    contact@10hourshouston.com
                   </a>
                 </div>
               </div>
 
               <form
                 className="sponsor-form w-full bg-white px-6 py-9 shadow-[0_2px_20px_rgba(0,0,0,0.035)] md:px-12 md:py-12"
-                onSubmit={(event) => {
-                  event.preventDefault()
-                  const data = new FormData(event.currentTarget)
-                  const subject = encodeURIComponent(`10 Hours Houston Partnership Inquiry — ${data.get('partnershipType')}`)
-                  const body = encodeURIComponent([
-                    `First Name: ${data.get('firstName')}`,
-                    `Last Name: ${data.get('lastName')}`,
-                    `Title: ${data.get('title')}`,
-                    `Company: ${data.get('company')}`,
-                    `Email: ${data.get('email')}`,
-                    `Partnership Type: ${data.get('partnershipType')}`,
-                  ].join('\n'))
-                  window.location.href = `mailto:hello@10hourshouston.com?subject=${subject}&body=${body}`
-                }}
+                noValidate
+                onSubmit={handleSponsorSubmit}
               >
                 <div className="grid gap-9">
                   <label className="grid gap-2 text-lg">
                     <span>First Name</span>
-                    <input required name="firstName" type="text" placeholder="First Name" className="h-14 border-b border-black/35 bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]" />
+                    <input required maxLength="80" name="firstName" type="text" autoComplete="given-name" placeholder="First Name" aria-invalid={Boolean(formErrors.firstName)} aria-describedby={formErrors.firstName ? 'firstName-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.firstName ? 'border-red-600' : 'border-black/35'}`} />
+                    {formErrors.firstName && <span id="firstName-error" className="text-sm text-red-700">{formErrors.firstName}</span>}
                   </label>
                   <label className="grid gap-2 text-lg">
                     <span>Last Name</span>
-                    <input required name="lastName" type="text" placeholder="Last Name" className="h-14 border-b border-black/35 bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]" />
+                    <input required maxLength="80" name="lastName" type="text" autoComplete="family-name" placeholder="Last Name" aria-invalid={Boolean(formErrors.lastName)} aria-describedby={formErrors.lastName ? 'lastName-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.lastName ? 'border-red-600' : 'border-black/35'}`} />
+                    {formErrors.lastName && <span id="lastName-error" className="text-sm text-red-700">{formErrors.lastName}</span>}
                   </label>
                   <label className="grid gap-2 text-lg">
                     <span>Title</span>
-                    <input required name="title" type="text" placeholder="Title" className="h-14 border-b border-black/35 bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]" />
+                    <input required maxLength="100" name="title" type="text" autoComplete="organization-title" placeholder="Title" aria-invalid={Boolean(formErrors.title)} aria-describedby={formErrors.title ? 'title-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.title ? 'border-red-600' : 'border-black/35'}`} />
+                    {formErrors.title && <span id="title-error" className="text-sm text-red-700">{formErrors.title}</span>}
                   </label>
                   <label className="grid gap-2 text-lg">
                     <span>Company</span>
-                    <input required name="company" type="text" placeholder="Company" className="h-14 border-b border-black/35 bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]" />
+                    <input required maxLength="120" name="company" type="text" autoComplete="organization" placeholder="Company" aria-invalid={Boolean(formErrors.company)} aria-describedby={formErrors.company ? 'company-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.company ? 'border-red-600' : 'border-black/35'}`} />
+                    {formErrors.company && <span id="company-error" className="text-sm text-red-700">{formErrors.company}</span>}
                   </label>
                   <label className="grid gap-2 text-lg">
                     <span>Email</span>
-                    <input required name="email" type="email" placeholder="Email" className="h-14 border-b border-black/35 bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301]" />
+                    <input required maxLength="254" name="email" type="email" inputMode="email" autoComplete="email" placeholder="Email" aria-invalid={Boolean(formErrors.email)} aria-describedby={formErrors.email ? 'email-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.email ? 'border-red-600' : 'border-black/35'}`} />
+                    {formErrors.email && <span id="email-error" className="text-sm text-red-700">{formErrors.email}</span>}
                   </label>
                   <label className="grid gap-3 text-lg">
-                    <span>Partnership Type</span>
+                    <span>Sponsorship Level</span>
                     <span className="relative block">
-                      <select required name="partnershipType" defaultValue="" className="h-14 w-full appearance-none border border-black/20 bg-white px-4 pr-12 text-lg outline-none transition-colors focus:border-[#f73301]">
-                        <option value="" disabled>Select a partnership</option>
-                        {partnershipOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+                      <select required name="sponsorshipTier" defaultValue="" aria-invalid={Boolean(formErrors.sponsorshipTier)} aria-describedby={formErrors.sponsorshipTier ? 'sponsorshipTier-error' : undefined} onChange={clearFieldError} className={`h-14 w-full appearance-none border bg-white px-4 pr-12 text-lg outline-none transition-colors focus:border-[#f73301] ${formErrors.sponsorshipTier ? 'border-red-600' : 'border-black/20'}`}>
+                        <option value="" disabled>Select a sponsorship level</option>
+                        {sponsorshipTiers.map((tier) => <option key={tier} value={tier}>{tier}</option>)}
                       </select>
                       <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm" aria-hidden="true">⌄</span>
                     </span>
+                    {formErrors.sponsorshipTier && <span id="sponsorshipTier-error" className="text-sm text-red-700">{formErrors.sponsorshipTier}</span>}
                   </label>
                 </div>
 
@@ -1261,6 +1559,11 @@ function SponsorPage() {
                     Submit
                   </button>
                 </div>
+                {formStatus && (
+                  <p className={`mt-5 text-center text-sm ${Object.keys(formErrors).length > 0 ? 'text-red-700' : 'text-black/65'}`} role={Object.keys(formErrors).length > 0 ? 'alert' : 'status'} aria-live="polite">
+                    {formStatus}
+                  </p>
+                )}
               </form>
             </div>
           </div>
