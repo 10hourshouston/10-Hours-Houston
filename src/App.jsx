@@ -8,8 +8,15 @@ gsap.registerPlugin(ScrollTrigger)
 
 const EVENT_TIME = new Date('2026-10-31T10:00:00-05:00').getTime()
 const REGISTER_URL = 'https://luma.com/oe8cgk9v'
-const SPONSOR_EMAIL = '10hourshouston@gmail.com'
 const DONATION_URL = 'https://www.zeffy.com/en-US/donation-form/donate-and-partner'
+const SPONSOR_FORM_RESPONSE_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd6NQId6OcJSy3z4Kg-08EDYg96X_QVHAr8ltp1bodgK2NK_A/formResponse'
+const SPONSOR_FORM_FIELDS = {
+  firstName: 'entry.626849409',
+  lastName: 'entry.1939388449',
+  company: 'entry.1307811072',
+  title: 'entry.1653343231',
+  sponsorshipTier: 'entry.973936506',
+}
 
 function timeRemaining() {
   const total = Math.max(0, Math.floor((EVENT_TIME - Date.now()) / 1000))
@@ -1445,6 +1452,7 @@ function SchedulePage() {
 function SponsorPage() {
   const [formErrors, setFormErrors] = useState({})
   const [formStatus, setFormStatus] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -1483,19 +1491,42 @@ function SponsorPage() {
     }
 
     setFormErrors({})
-    setFormStatus('Your email app is opening with your partnership inquiry ready to send. Once received, we’ll email you the sponsorship package for your selected tier.')
+    setIsSubmitting(true)
+    setFormStatus('Submitting your partnership inquiry…')
 
-    const subject = encodeURIComponent(`10 Hours Houston Sponsorship Inquiry — ${values.sponsorshipTier}`)
-    const body = encodeURIComponent([
-      `First Name: ${values.firstName}`,
-      `Last Name: ${values.lastName}`,
-      `Title: ${values.title}`,
-      `Company: ${values.company}`,
-      `Email: ${values.email}`,
-      `Sponsorship Tier: ${values.sponsorshipTier}`,
-    ].join('\n'))
+    const googleForm = document.createElement('form')
+    googleForm.action = SPONSOR_FORM_RESPONSE_URL
+    googleForm.method = 'POST'
+    googleForm.target = 'sponsor-form-response'
+    googleForm.hidden = true
 
-    window.location.href = `mailto:${SPONSOR_EMAIL}?subject=${subject}&body=${body}`
+    const fields = {
+      emailAddress: values.email,
+      [SPONSOR_FORM_FIELDS.firstName]: values.firstName,
+      [SPONSOR_FORM_FIELDS.lastName]: values.lastName,
+      [SPONSOR_FORM_FIELDS.company]: values.company,
+      [SPONSOR_FORM_FIELDS.title]: values.title,
+      [SPONSOR_FORM_FIELDS.sponsorshipTier]: values.sponsorshipTier,
+    }
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement('input')
+      input.type = 'hidden'
+      input.name = name
+      input.value = value
+      googleForm.appendChild(input)
+    })
+
+    document.body.appendChild(googleForm)
+    googleForm.submit()
+    googleForm.remove()
+  }
+
+  const handleGoogleFormResponse = () => {
+    if (!isSubmitting) return
+    setIsSubmitting(false)
+    setFormStatus('Thank you—your sponsorship interest has been received. We’ll email you the sponsorship package for your selected tier.')
+    document.querySelector('.sponsor-form')?.reset()
   }
 
   return (
@@ -1595,8 +1626,8 @@ function SponsorPage() {
                 </div>
 
                 <div className="mt-12 flex justify-center">
-                  <button type="submit" className="min-w-44 bg-[#f73301] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#c42a01]">
-                    Send inquiry
+                  <button type="submit" disabled={isSubmitting} className="min-w-44 bg-[#f73301] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#c42a01] disabled:opacity-60">
+                    {isSubmitting ? 'Submitting…' : 'Submit'}
                   </button>
                 </div>
                 {formStatus && (
@@ -1605,6 +1636,12 @@ function SponsorPage() {
                   </p>
                 )}
               </form>
+              <iframe
+                className="sr-only"
+                name="sponsor-form-response"
+                title="Sponsorship form submission response"
+                onLoad={handleGoogleFormResponse}
+              />
             </div>
           </div>
         </section>
