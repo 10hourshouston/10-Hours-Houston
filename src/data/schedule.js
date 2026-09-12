@@ -1,0 +1,37 @@
+export const scheduleMovements = {
+  encounter: { numeral: 'I', title: 'Encounter', subtitle: 'Fire and consecration', time: '10:00 AM — 11:45 AM', count: '6 segments' },
+  revelation: { numeral: 'II', title: 'Revelation', subtitle: 'Vision for the mountains', time: '12:05 PM — 1:35 PM', count: '4 segments' },
+  engagement: { numeral: 'III', title: 'Engagement', subtitle: 'Witnessing in the age', time: '2:20 PM — 6:40 PM', count: '8 segments' },
+  commissioning: { numeral: 'IV', title: 'Commissioning', subtitle: 'Deployment into the city', time: '6:40 PM — 8:00 PM', count: '6 segments' },
+}
+
+export const scheduleItems = [
+  { movement: 'encounter', time: '10:00 — 10:10 AM', duration: '10 min', type: 'Opening', title: 'Opening Prayer & Call to Worship', description: 'Welcome, theme declaration, and the setting of the spiritual atmosphere.' },
+  { movement: 'encounter', time: '10:10 — 10:35 AM', duration: '25 min', type: 'Worship', title: 'Intense Worship I', description: 'Deep worship, surrender, hunger, and baptism of fire.' },
+  { movement: 'encounter', time: '10:35 — 10:40 AM', duration: '5 min', type: 'Teaching', title: 'Vision & Mission', description: 'Give clarity and establish the mandate for the day.' },
+  { movement: 'encounter', time: '10:40 — 11:10 AM', duration: '30 min', type: 'Prayer', title: 'Consecration', description: 'Repentance, purification, and personal rededication.' },
+  { movement: 'encounter', time: '11:10 — 11:40 AM', duration: '30 min', type: 'Prayer', title: 'Alignment', description: 'Alignment with God’s will for one’s life.' },
+  { movement: 'encounter', time: '11:40 — 11:45 AM', duration: '5 min', type: 'Spoken Word', title: 'Spoken Word', description: 'A creative proclamation of the Witnesses theme through poetry.' },
+  { movement: 'encounter', time: '11:45 AM — 12:05 PM', duration: '20 min', type: 'Interval', title: 'Exhibit Booths · Networking · Coffee', description: 'Explore partner exhibits, build meaningful connections, and enjoy coffee.', interval: true },
+  { movement: 'revelation', time: '12:05 — 12:15 PM', duration: '10 min', type: 'Film', title: 'Documentary', description: 'Explore Christianity’s historical contribution to science and technology, and the Church’s mandate in the modern age.' },
+  { movement: 'revelation', time: '12:15 — 12:35 PM', duration: '20 min', type: 'Teaching', title: 'Introduction — Witnesses', description: 'Establish the theological and cultural meaning of being a witness, and introduce the Spheres of Influence framework.' },
+  { movement: 'revelation', time: '12:35 — 1:05 PM', duration: '30 min', type: 'Prayer', title: 'Prayer Session I — Re-digging Ancient Wells I', description: 'Targeted intercession over selected spheres of influence.' },
+  { movement: 'revelation', time: '1:05 — 1:35 PM', duration: '30 min', type: 'Prayer', title: 'Prayer Session II — Re-digging Ancient Wells II', description: 'Targeted intercession over selected spheres of influence.' },
+  { movement: 'revelation', time: '1:35 — 2:20 PM', duration: '45 min', type: 'Interval', title: 'Lunch', description: 'A shared meal and rest before the afternoon sessions.', interval: true },
+  { movement: 'engagement', time: '2:20 — 2:40 PM', duration: '20 min', type: 'Worship', title: 'Worship II', description: 'Recenter hearts on God and prepare the atmosphere for the afternoon conversations and impartation.' },
+  { movement: 'engagement', time: '2:40 — 3:40 PM', duration: '1 hour', type: 'Panel', title: 'Panel Session I — Witnessing in the AI Age', description: 'Explore how artificial intelligence is reshaping society, and how believers can respond with wisdom, ethics, excellence, and conviction.', featured: true },
+  { movement: 'engagement', time: '3:40 — 3:55 PM', duration: '15 min', type: 'Q & A', title: 'Panel Session I — Questions', description: 'An interactive audience question-and-answer session with the panelists.' },
+  { movement: 'engagement', time: '3:55 — 4:25 PM', duration: '30 min', type: 'Prayer', title: 'Wisdom for the Age', description: 'Prayers for divine wisdom in engaging this age.' },
+  { movement: 'engagement', time: '4:25 — 4:55 PM', duration: '30 min', type: 'Prayer', title: 'Boldness and Audacity', description: 'Prayers for boldness and audacity to thrive in this age.' },
+  { movement: 'engagement', time: '4:55 — 5:15 PM', duration: '20 min', type: 'Interval', title: 'Exhibit Booths · Networking · Coffee', description: 'Explore partner exhibits, build meaningful connections, and enjoy coffee.', interval: true },
+  { movement: 'engagement', time: '5:15 — 5:25 PM', duration: '10 min', type: 'Worship', title: 'Worship III', description: 'A focused moment of worship to renew spiritual attention and prepare hearts for the next session.' },
+  { movement: 'engagement', time: '5:25 — 6:25 PM', duration: '1 hour', type: 'Panel', title: 'Panel Session II — Witnessing with Content', description: 'Examine how media, storytelling, communication, and digital content can communicate truth and shape culture.', featured: true },
+  { movement: 'engagement', time: '6:25 — 6:40 PM', duration: '15 min', type: 'Q & A', title: 'Panel Session II — Questions', description: 'An interactive audience question-and-answer session with the panelists.' },
+  { movement: 'commissioning', time: '6:40 — 6:55 PM', duration: '15 min', type: 'Prayer', title: 'Houston & America’s Prophetic Mandate · Intercession', description: 'Prophetic declarations and intercession concerning Houston’s role in revival, innovation, and global influence, and America’s spiritual destiny.' },
+  { movement: 'commissioning', time: '6:55 — 7:25 PM', duration: '30 min', type: 'Ministry', title: 'Impartation and the Prophetic', description: 'A time of prophetic ministry, prayer, spiritual impartation, commissioning, and activation for Kingdom assignments.' },
+  { movement: 'commissioning', time: '7:25 — 7:35 PM', duration: '10 min', type: 'Ministry', title: 'Testimonies', description: 'Personal accounts of God’s faithfulness and answered prayer.' },
+  { movement: 'commissioning', time: '7:35 — 7:45 PM', duration: '10 min', type: 'Worship', title: 'Praise', description: 'Celebrate God’s faithfulness through joyful praise, thanksgiving, and corporate rejoicing.' },
+  { movement: 'commissioning', time: '7:45 — 7:55 PM', duration: '10 min', type: 'Protocol', title: 'Honor Guests', description: 'Recognize and appreciate invited guests, speakers, partners, sponsors, leaders, and contributors.' },
+  { movement: 'commissioning', time: '7:55 — 8:00 PM', duration: '5 min', type: 'Closing', title: 'Closing', description: 'Final charge, key announcements, next steps, appreciation, closing prayer, and benediction.' },
+]
+
