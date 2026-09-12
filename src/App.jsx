@@ -1453,10 +1453,30 @@ function SponsorPage() {
   const [formErrors, setFormErrors] = useState({})
   const [formStatus, setFormStatus] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successModalOpen, setSuccessModalOpen] = useState(false)
+  const successCloseButtonRef = useRef(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    if (!successModalOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setSuccessModalOpen(false)
+    }
+
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleKeyDown)
+    successCloseButtonRef.current?.focus()
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [successModalOpen])
 
   const clearFieldError = (event) => {
     const { name } = event.currentTarget
@@ -1525,7 +1545,8 @@ function SponsorPage() {
   const handleGoogleFormResponse = () => {
     if (!isSubmitting) return
     setIsSubmitting(false)
-    setFormStatus('Thank you—your sponsorship interest has been received. We’ll email you the sponsorship package for your selected tier.')
+    setFormStatus('')
+    setSuccessModalOpen(true)
     document.querySelector('.sponsor-form')?.reset()
   }
 
@@ -1646,6 +1667,37 @@ function SponsorPage() {
           </div>
         </section>
       </main>
+      {successModalOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 px-6 py-10 backdrop-blur-sm"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSuccessModalOpen(false)
+          }}
+        >
+          <div
+            className="w-full max-w-lg bg-white px-7 py-9 text-center shadow-2xl md:px-12 md:py-12"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="sponsor-success-heading"
+            aria-describedby="sponsor-success-message"
+          >
+            <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[#f73301] text-2xl text-white" aria-hidden="true">✓</div>
+            <p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f73301]">Inquiry received</p>
+            <h2 id="sponsor-success-heading" className="mt-3 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">Thank you for your interest.</h2>
+            <p id="sponsor-success-message" className="mx-auto mt-5 max-w-md text-base leading-relaxed text-black/60">
+              Your sponsorship interest has been received. We’ll email you the sponsorship package for your selected tier.
+            </p>
+            <button
+              ref={successCloseButtonRef}
+              type="button"
+              className="mt-8 bg-[#f73301] px-8 py-4 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#c42a01]"
+              onClick={() => setSuccessModalOpen(false)}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
       <Footer />
     </div>
   )
