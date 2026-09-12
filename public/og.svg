@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080808"/>
+      <stop offset="1" stop-color="#1a0b07"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="20%" r="70%">
+      <stop offset="0" stop-color="#f73301" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#f73301" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <path d="M0 505C225 455 405 555 624 510C842 465 1010 338 1200 380V630H0Z" fill="#f73301" opacity="0.08"/>
+  <rect x="70" y="58" width="1060" height="514" fill="none" stroke="#ffffff" stroke-opacity="0.12"/>
+
+  <image href="10-hours-houston-logo.svg" x="92" y="72" width="360" height="151"/>
+
+  <text x="92" y="350" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="800" letter-spacing="-5">WITNESSES</text>
+  <rect x="92" y="383" width="144" height="8" fill="#f73301"/>
+  <text x="92" y="444" fill="#ffffff" fill-opacity="0.72" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" letter-spacing="7">SCIENCE  ·  TECHNOLOGY  ·  MEDIA</text>
+
+  <text x="92" y="526" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Saturday, October 31, 2026</text>
+  <text x="1108" y="526" fill="#f73301" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="end">Houston, Texas</text>
+</svg>
