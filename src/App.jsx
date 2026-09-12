@@ -1213,6 +1213,17 @@ const sponsorshipTiers = [
   'Diamond — $15,000+',
 ]
 
+const sponsorTitles = [
+  'Mr.',
+  'Mrs.',
+  'Ms.',
+  'Miss',
+  'Dr.',
+  'Pastor',
+  'Reverend',
+  'Professor',
+]
+
 const sponsorNamePattern = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’\-]*$/u
 const sponsorEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
@@ -1229,7 +1240,7 @@ function validateSponsorForm(values) {
   if (values.lastName.length < 2 || !sponsorNamePattern.test(values.lastName)) {
     errors.lastName = 'Enter a valid last name.'
   }
-  if (values.title.length < 2) errors.title = 'Enter your professional title.'
+  if (!sponsorTitles.includes(values.title)) errors.title = 'Select a title.'
   if (values.company.length < 2) errors.company = 'Enter your company or organization.'
   if (values.email.length > 254 || !sponsorEmailPattern.test(values.email)) {
     errors.email = 'Enter a valid email address.'
@@ -1516,6 +1527,17 @@ function SponsorPage() {
                 onSubmit={handleSponsorSubmit}
               >
                 <div className="grid gap-9">
+                  <label className="grid gap-3 text-lg">
+                    <span>Title</span>
+                    <span className="relative block">
+                      <select required name="title" defaultValue="" autoComplete="honorific-prefix" aria-invalid={Boolean(formErrors.title)} aria-describedby={formErrors.title ? 'title-error' : undefined} onChange={clearFieldError} className={`h-14 w-full appearance-none border bg-white px-4 pr-12 text-lg outline-none transition-colors focus:border-[#f73301] ${formErrors.title ? 'border-red-600' : 'border-black/20'}`}>
+                        <option value="" disabled>Select a title</option>
+                        {sponsorTitles.map((title) => <option key={title} value={title}>{title}</option>)}
+                      </select>
+                      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm" aria-hidden="true">⌄</span>
+                    </span>
+                    {formErrors.title && <span id="title-error" className="text-sm text-red-700">{formErrors.title}</span>}
+                  </label>
                   <label className="grid gap-2 text-lg">
                     <span>First Name</span>
                     <input required maxLength="80" name="firstName" type="text" autoComplete="given-name" placeholder="First Name" aria-invalid={Boolean(formErrors.firstName)} aria-describedby={formErrors.firstName ? 'firstName-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.firstName ? 'border-red-600' : 'border-black/35'}`} />
@@ -1525,11 +1547,6 @@ function SponsorPage() {
                     <span>Last Name</span>
                     <input required maxLength="80" name="lastName" type="text" autoComplete="family-name" placeholder="Last Name" aria-invalid={Boolean(formErrors.lastName)} aria-describedby={formErrors.lastName ? 'lastName-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.lastName ? 'border-red-600' : 'border-black/35'}`} />
                     {formErrors.lastName && <span id="lastName-error" className="text-sm text-red-700">{formErrors.lastName}</span>}
-                  </label>
-                  <label className="grid gap-2 text-lg">
-                    <span>Title</span>
-                    <input required maxLength="100" name="title" type="text" autoComplete="organization-title" placeholder="Title" aria-invalid={Boolean(formErrors.title)} aria-describedby={formErrors.title ? 'title-error' : undefined} onChange={clearFieldError} className={`h-14 border-b bg-transparent px-0 text-lg outline-none transition-colors placeholder:text-black/35 focus:border-[#f73301] ${formErrors.title ? 'border-red-600' : 'border-black/35'}`} />
-                    {formErrors.title && <span id="title-error" className="text-sm text-red-700">{formErrors.title}</span>}
                   </label>
                   <label className="grid gap-2 text-lg">
                     <span>Company</span>
